@@ -1,9 +1,8 @@
 "use server";
 
 export default async function GetAllArmour() {
-  const res = await fetch("https://wilds.mhdb.io/en/armor");
+  const res = await fetch("https://wilds.mhdb.io/en/armor/sets");
   const data = await res.json();
-
   return (
     <div>
       <h1 className="text-2xl font-bold">Armor List</h1>

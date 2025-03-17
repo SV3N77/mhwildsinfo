@@ -7,38 +7,31 @@ import { TopBar } from "@/components/topBar";
 // Navigation card data
 const navigationCards = [
   {
-    title: "Armour",
-    description: "A list of all the armours in the game",
-    icon: "/placeholder.svg?height=40&width=40",
-    link: "/armour",
-    color: "bg-blue-100 dark:bg-blue-950",
-  },
-  {
     title: "Armour Sets",
     description: "A list of all the armour sets in the game",
     icon: "/placeholder.svg?height=40&width=40",
-    link: "/products",
+    link: "/armour",
     color: "bg-green-100 dark:bg-green-950",
   },
   {
     title: "Decorations",
     description: "A list of all the decorations in the game",
     icon: "/placeholder.svg?height=40&width=40",
-    link: "/categories",
+    link: "/decorations",
     color: "bg-purple-100 dark:bg-purple-950",
   },
   {
     title: "Items",
     description: "A list of all the items in the game",
     icon: "/placeholder.svg?height=40&width=40",
-    link: "/deals",
+    link: "/items",
     color: "bg-amber-100 dark:bg-amber-950",
   },
   {
     title: "Weapons",
     description: "A list of all the weapons in the game",
     icon: "/placeholder.svg?height=40&width=40",
-    link: "/about",
+    link: "/weapons",
     color: "bg-rose-100 dark:bg-rose-950",
   },
 ];
