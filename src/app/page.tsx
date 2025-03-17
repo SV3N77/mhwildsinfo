@@ -7,46 +7,39 @@ import { TopBar } from "@/components/topBar";
 // Navigation card data
 const navigationCards = [
   {
-    title: "Search",
-    description: "Find products, services, and information",
+    title: "Armour",
+    description: "A list of all the armours in the game",
     icon: "/placeholder.svg?height=40&width=40",
     link: "/search",
     color: "bg-blue-100 dark:bg-blue-950",
   },
   {
-    title: "Products",
-    description: "Browse our catalog of products",
+    title: "Armour Sets",
+    description: "A list of all the armour sets in the game",
     icon: "/placeholder.svg?height=40&width=40",
     link: "/products",
     color: "bg-green-100 dark:bg-green-950",
   },
   {
-    title: "Categories",
-    description: "Explore products by category",
+    title: "Decorations",
+    description: "A list of all the decorations in the game",
     icon: "/placeholder.svg?height=40&width=40",
     link: "/categories",
     color: "bg-purple-100 dark:bg-purple-950",
   },
   {
-    title: "Deals",
-    description: "Check out our latest deals and promotions",
+    title: "Items",
+    description: "A list of all the items in the game",
     icon: "/placeholder.svg?height=40&width=40",
     link: "/deals",
     color: "bg-amber-100 dark:bg-amber-950",
   },
   {
-    title: "About Us",
-    description: "Learn more about our company",
+    title: "Weapons",
+    description: "A list of all the weapons in the game",
     icon: "/placeholder.svg?height=40&width=40",
     link: "/about",
     color: "bg-rose-100 dark:bg-rose-950",
-  },
-  {
-    title: "Contact",
-    description: "Get in touch with our team",
-    icon: "/placeholder.svg?height=40&width=40",
-    link: "/contact",
-    color: "bg-teal-100 dark:bg-teal-950",
   },
 ];
 
