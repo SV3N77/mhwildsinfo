@@ -10,7 +10,7 @@ const navigationCards = [
     title: "Armour",
     description: "A list of all the armours in the game",
     icon: "/placeholder.svg?height=40&width=40",
-    link: "/search",
+    link: "/armour",
     color: "bg-blue-100 dark:bg-blue-950",
   },
   {
@@ -86,6 +86,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        <section></section>
       </main>
     </div>
   );
