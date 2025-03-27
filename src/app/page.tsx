@@ -9,28 +9,28 @@ const navigationCards = [
   {
     title: "Armour Sets",
     description: "A list of all the armour sets in the game",
-    icon: "/placeholder.svg?height=40&width=40",
+    icon: "",
     link: "/armour",
     color: "bg-green-100 dark:bg-green-950",
   },
   {
     title: "Decorations",
     description: "A list of all the decorations in the game",
-    icon: "/placeholder.svg?height=40&width=40",
+    icon: "",
     link: "/decorations",
     color: "bg-purple-100 dark:bg-purple-950",
   },
   {
     title: "Items",
     description: "A list of all the items in the game",
-    icon: "/placeholder.svg?height=40&width=40",
+    icon: "",
     link: "/items",
     color: "bg-amber-100 dark:bg-amber-950",
   },
   {
     title: "Weapons",
     description: "A list of all the weapons in the game",
-    icon: "/placeholder.svg?height=40&width=40",
+    icon: "",
     link: "/weapons",
     color: "bg-rose-100 dark:bg-rose-950",
   },
@@ -55,9 +55,10 @@ export default function Home() {
               <Link href={card.link} key={card.title} className="block h-full">
                 <Card className="h-full transition-all hover:shadow-md hover:translate-y-[-4px]">
                   <CardHeader className={`rounded-t-lg ${card.color}`}>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 py-3">
+                      {/* Icon */}
                       <Image
-                        src={card.icon || "/placeholder.svg"}
+                        src={card.icon || "/images/placeholder.png"}
                         alt={card.title}
                         width={40}
                         height={40}
