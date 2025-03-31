@@ -2,12 +2,12 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArmourSetData, Piece } from "@/lib/armour";
+import { calculateTotalBaseDefense } from "@/lib/utils";
 
 export default async function GetAllArmour() {
   const res = await fetch("https://wilds.mhdb.io/en/armor/sets");
   const data = (await res.json()) as ArmourSetData[];
   const sortedDataArmour = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
-  console.log(sortedDataArmour.at(124));
 
   return (
     <div className="flex flex-col px-20 py-10">
@@ -18,6 +18,10 @@ export default async function GetAllArmour() {
             <AccordionItem value={`${armour.id}`} className="border border-gray-300 rounded-lg shadow-md">
               <AccordionTrigger className="p-4 text-base font-semibold">{armour.name}</AccordionTrigger>
               <AccordionContent className="p-4 bg-gray-50 rounded-b-lg flex flex-col gap-4">
+                <div className="flex justify-between items-center">
+                  <div>Lv 1</div>
+                  <div>{calculateTotalBaseDefense(armour)}</div>
+                </div>
                 {armour.pieces.map((piece: Piece) => (
                   <div key={piece.id} className="flex flex-col gap-2">
                     <div className="flex gap-2 items-center">
