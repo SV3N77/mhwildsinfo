@@ -2,7 +2,7 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArmourSetData, Piece } from "@/lib/armour";
-import { calculateTotalBaseDefense } from "@/lib/utils";
+import { calculateTotalBaseDefense, calculateTotalResistances, getFormattedResistances } from "@/lib/utils";
 
 export default async function GetAllArmour() {
   const res = await fetch("https://wilds.mhdb.io/en/armor/sets");
@@ -22,12 +22,20 @@ export default async function GetAllArmour() {
                   <div>Lv 1</div>
                   <div>{calculateTotalBaseDefense(armour)}</div>
                 </div>
+                <div className="flex flex-col gap-2">
+                  <div className="text-lg font-semibold">Resistances</div>
+                  {getFormattedResistances(armour).map((stat) => (
+                    <div key={stat.label} className="flex gap-2 items-center justify-between">
+                      <div className="text-sm font-semibold">{stat.label}</div>
+                      <div>{stat.value}</div>
+                    </div>
+                  ))}
+                </div>
                 {armour.pieces.map((piece: Piece) => (
                   <div key={piece.id} className="flex flex-col gap-2">
                     <div className="flex gap-2 items-center">
                       <div className="flex flex-col">
                         <div className="text-lg font-semibold">{piece.name}</div>
-                        <div className="text-sm text-gray-500">{piece.description}</div>
                       </div>
                     </div>
                   </div>

@@ -126,3 +126,8 @@ export interface Skill5 {
 export interface Skill6 {
   id: number;
 }
+
+export interface DisplayStat {
+  label: string; // e.g., "Fire Resistance"
+  value: number; // The calculated numeric value
+}
