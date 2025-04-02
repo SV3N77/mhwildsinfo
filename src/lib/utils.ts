@@ -14,7 +14,7 @@ function capitalizeFirstLetter(str: string): string {
 export function calculateTotalBaseDefense(armourSetData: ArmourSetData): number {
   // Input validation: Check if data exists and has pieces
   if (!armourSetData || !armourSetData.pieces || armourSetData.pieces.length === 0) {
-    console.warn("calculateTotalBaseDefense: Input data is missing or has no pieces. Returning 0.");
+    // If data is missing or has no pieces, return 0 for the total defense
     return 0;
   }
 
@@ -42,7 +42,7 @@ export function calculateTotalResistances(armorSetData: ArmourSetData): Resistan
 
   // Input validation: Check if data exists and has pieces
   if (!armorSetData || !armorSetData.pieces || armorSetData.pieces.length === 0) {
-    console.warn("calculateTotalResistances: Input data is missing or has no pieces. Returning zero resistances.");
+    // If data is missing or has no pieces, return the initialTotals object
     return initialTotals;
   }
 
