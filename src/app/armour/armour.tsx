@@ -1,6 +1,7 @@
 "use server";
 
 import Defense from "@/components/armour/defense";
+import Pieces from "@/components/armour/pieces";
 import Resistances from "@/components/armour/resistances";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArmourSetData, Piece } from "@/lib/armour";
@@ -21,16 +22,7 @@ export default async function GetAllArmour() {
               <AccordionContent className="p-4 bg-gray-50 rounded-b-lg flex flex-col gap-3">
                 <Defense armour={armour} />
                 <Resistances armour={armour} />
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-lg font-semibold">Pieces</h2>
-                  {armour.pieces.map((piece: Piece) => (
-                    <div key={piece.id} className="flex flex-col gap-1">
-                      <div className="flex flex-col">
-                        <div className="text-sm">{piece.name}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <Pieces pieces={armour.pieces} />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
