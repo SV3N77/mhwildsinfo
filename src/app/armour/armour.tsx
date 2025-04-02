@@ -18,18 +18,19 @@ export default async function GetAllArmour() {
           <Accordion key={armour.id} type="single" collapsible className="w-full max-w-md mx-auto">
             <AccordionItem value={`${armour.id}`} className="border border-gray-300 rounded-lg shadow-md">
               <AccordionTrigger className="p-4 text-base font-semibold">{armour.name}</AccordionTrigger>
-              <AccordionContent className="p-4 bg-gray-50 rounded-b-lg flex flex-col gap-4">
+              <AccordionContent className="p-4 bg-gray-50 rounded-b-lg flex flex-col gap-3">
                 <Defense armour={armour} />
                 <Resistances armour={armour} />
-                {armour.pieces.map((piece: Piece) => (
-                  <div key={piece.id} className="flex flex-col gap-2">
-                    <div className="flex gap-2 items-center">
+                <div className="flex flex-col gap-1">
+                  <h2 className="text-lg font-semibold">Pieces</h2>
+                  {armour.pieces.map((piece: Piece) => (
+                    <div key={piece.id} className="flex flex-col gap-1">
                       <div className="flex flex-col">
-                        <div className="text-lg font-semibold">{piece.name}</div>
+                        <div className="text-sm">{piece.name}</div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
