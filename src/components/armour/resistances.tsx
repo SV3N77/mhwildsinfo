@@ -1,4 +1,4 @@
-import { ArmourSetData, DisplayStat } from "@/lib/armour";
+import { ArmourSetData, DisplayStat } from "@/lib/types/armour";
 import { getFormattedResistances } from "@/lib/utils";
 interface ResistancesProps {
   armour: ArmourSetData;

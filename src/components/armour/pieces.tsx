@@ -1,4 +1,4 @@
-import { Piece } from "@/lib/armour";
+import { Piece } from "@/lib/types/armour";
 
 interface PiecesProps {
   pieces: Piece[];

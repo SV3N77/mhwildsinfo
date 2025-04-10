@@ -4,7 +4,7 @@ import Defense from "@/components/armour/defense";
 import Pieces from "@/components/armour/pieces";
 import Resistances from "@/components/armour/resistances";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ArmourSetData, Piece } from "@/lib/armour";
+import { ArmourSetData } from "@/lib/types/armour";
 
 export default async function GetAllArmour() {
   const res = await fetch("https://wilds.mhdb.io/en/armor/sets");

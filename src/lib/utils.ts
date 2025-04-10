@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ArmourSetData, DisplayStat, Resistances } from "./armour";
+import { ArmourSetData, DisplayStat, Resistances } from "./types/armour";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
