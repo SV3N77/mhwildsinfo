@@ -1,5 +1,11 @@
+import { TopBar } from "@/components/topBar";
 import GetAllItems from "./items";
 
 export default function DecorationsPage() {
-  return <GetAllItems />;
+  return (
+    <div>
+      <TopBar />
+      <GetAllItems />;
+    </div>
+  );
 }
