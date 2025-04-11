@@ -9,6 +9,7 @@ import { ArmourSetData } from "@/lib/types/armour";
 export default async function GetAllArmour() {
   const res = await fetch("https://wilds.mhdb.io/en/armor/sets");
   const data = (await res.json()) as ArmourSetData[];
+  // Sort the armour by name
   const sortedDataArmour = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 
   return (

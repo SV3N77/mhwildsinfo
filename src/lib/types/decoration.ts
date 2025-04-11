@@ -9,13 +9,13 @@ interface DecorationSkillInfo {
 }
 
 export interface DecorationData {
-  id: number; // Use for React key
+  id: number;
   name: string;
   description: string;
-  value?: number; // Optional based on example
-  slot: number; // Column needed
-  rarity: number; // Column needed
-  kind: string; // Column needed
-  skills?: DecorationSkillInfo[]; // Optional, not displayed in this table
-  gameId?: number; // Optional
+  value?: number;
+  slot: number;
+  rarity: number;
+  kind: string;
+  skills?: DecorationSkillInfo[];
+  gameId: number;
 }

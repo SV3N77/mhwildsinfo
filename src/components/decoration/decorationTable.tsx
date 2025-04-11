@@ -1,14 +1,12 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { DecorationData } from "@/lib/types/decoration";
 
-// Define Props interface for the component
 interface DecorationsTableProps {
-  decorations: DecorationData[]; // Expects an array of decorations
-  caption?: string; // Optional caption for the table
+  decorations: DecorationData[];
+  caption?: string;
 }
 
 export function DecorationsTable({ decorations }: DecorationsTableProps) {
-  // Handle cases where data might be empty
   if (!decorations || decorations.length === 0) {
     return <div>No decorations data available.</div>;
   }
@@ -25,7 +23,6 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {/* Map over the decorations data */}
         {decorations.map((deco) => (
           <TableRow key={deco.id}>
             <TableCell className="border px-4 py-2 font-medium">{deco.name}</TableCell>

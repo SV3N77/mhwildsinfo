@@ -5,6 +5,7 @@ import { DecorationsTable } from "@/components/decoration/decorationTable";
 export default async function GetAllDecorations() {
   const res = await fetch("https://wilds.mhdb.io/en/decorations");
   const data = await res.json();
+  // Sort the decorations by name
   const sortedDecoratiuons = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 
   return (
