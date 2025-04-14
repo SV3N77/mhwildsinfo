@@ -1,5 +1,7 @@
 import type { ItemData, ItemCategory, GroupedItems } from "../types/items";
 
+// TODO: fix and add the rest of the rules for the items
+
 export function categorizeItem(item: ItemData): ItemCategory {
   const name = item.name.toLowerCase();
   // const description = item.description.toLowerCase(); // Can be used for more complex rules
