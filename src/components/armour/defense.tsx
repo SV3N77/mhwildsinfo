@@ -1,5 +1,5 @@
 import { ArmourSetData } from "@/lib/types/armour";
-import { calculateTotalBaseDefense } from "@/lib/utils";
+import { calculateTotalBaseDefense } from "@/lib/utils/armourUtils";
 
 interface DefenseProps {
   armour: ArmourSetData;

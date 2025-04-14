@@ -1,16 +1,7 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { ArmourSetData, DisplayStat, Resistances } from "./types/armour";
+import { ArmourSetData, DisplayStat, Resistances } from "../types/armour";
+import { capitalizeFirstLetter } from "./utils";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-function capitalizeFirstLetter(str: string): string {
-  if (!str) return str;
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
+/* Armour Utils */
 export function calculateTotalBaseDefense(armourSetData: ArmourSetData): number {
   // Input validation: Check if data exists and has pieces
   if (!armourSetData || !armourSetData.pieces || armourSetData.pieces.length === 0) {
