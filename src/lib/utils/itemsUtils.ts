@@ -12,27 +12,39 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "binoculars" ||
     name === "camping kit" ||
     name === "portable bbq grill" ||
-    name === "fishing rod"
+    name === "fishing rod" ||
+    name === "common wood minnow" ||
+    name === "emerald jitterbait" ||
+    name === "tentacle jig" ||
+    name === "tuff joint bait" ||
+    name === "golden bughead" ||
+    name === "duster rig"
   ) {
     return "Tool";
   }
 
   // --- Specific Unique Items / Equipment-like ---
   if (
-    name.includes(" charm") ||
-    name.includes(" mantle") ||
-    name.includes(" orb") ||
-    name.includes(" aloe") ||
-    name.includes(" treasure") ||
-    name.includes(" voucher") ||
-    name.includes(" coin") ||
-    name === "Specklite" ||
-    name === "Argecite" ||
-    name.includes(" opal") ||
-    name.includes(" pollen") ||
-    name.includes(" sea pot") ||
-    name.includes(" vase") ||
-    name.includes(" Antimite ")
+    name.includes("charm") ||
+    name.includes("mantle") ||
+    name.includes("orb") ||
+    name.includes("aloe") ||
+    name.includes("treasure") ||
+    name.includes("voucher") ||
+    name.includes("coin") ||
+    name.includes("fulgurite") ||
+    name.includes("amber") ||
+    name === "specklite" ||
+    name === "argecite" ||
+    name.includes("opal") ||
+    name.includes("pollen") ||
+    name.includes("sea pot") ||
+    name.includes("vase") ||
+    name.includes("antimite") ||
+    name.includes("lantern") ||
+    name === "steel egg" ||
+    name === "silver egg" ||
+    name === "gold egg"
   )
     return "SpecialItem"; // e.g., Powercharm, Ghillie Mantle, Mystery Orb, Specklite, Argecite, etc.
 
@@ -46,6 +58,9 @@ export function categorizeItem(item: ItemData): ItemCategory {
   if (
     name === "pitfall trap" ||
     name === "shock trap" ||
+    name === "ez flash bomb" ||
+    name === "ez pitfall trap" ||
+    name === "ez shock trap" ||
     name === "tranq bomb" ||
     name === "smoke bomb" ||
     name.includes("barrel bomb")
@@ -53,7 +68,13 @@ export function categorizeItem(item: ItemData): ItemCategory {
     return "TrapsSlinger";
   }
   // Slinger Pods/Ammo/Knives
-  if (name.includes(" pod") || name === "stone" || name === "capture net" || name.includes(" knife")) {
+  if (
+    name.includes(" pod") ||
+    name === "stone" ||
+    name === "capture net" ||
+    name.includes(" knife") ||
+    name === "tranq blade"
+  ) {
     // Added knife/blade
     return "TrapsSlinger";
   }
@@ -66,6 +87,8 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name.includes("steak") ||
     name.includes("drink") ||
     name.includes("pill") ||
+    name === "first-aid med+" ||
+    name === "deodorant" ||
     name === "antidote" ||
     name === "nulberry" ||
     name === "herbal medicine" ||
@@ -98,8 +121,6 @@ export function categorizeItem(item: ItemData): ItemCategory {
     // Catch all EZ items
     return "Consumable";
   }
-  // Broader includes checks (less likely needed with specific names above)
-  // if (name.includes(' jerky') || name.includes(' pill') || name.includes(' drug') ... ) etc.
 
   // --- Materials (Check Before Broad Ingredients) ---
   if (
@@ -139,9 +160,34 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name.includes("bloodstone") ||
     name.includes("blood") ||
     name.includes("feeler") ||
+    name.includes("broth") ||
+    name.includes("sinew") ||
+    name.includes("molting") ||
+    name.includes("medulla") ||
+    name.includes("mucus") ||
+    name.includes("fluid") ||
+    name.includes("igniter") ||
+    name.includes("cilia") ||
+    name.includes("stinger") ||
+    name.includes("head") ||
+    name.includes("whisker") ||
+    name.includes("corneum") ||
+    name.includes("jewel") ||
+    name.includes("ridge") ||
+    name.includes("krano") ||
+    name.includes("pleura") ||
+    name === "firestone" ||
+    name === "firecell stone" ||
+    name === "dalthydon wool" ||
     name === "sild cotton" ||
     name === "suja textiles" ||
-    name === "azuz tanned leather"
+    name === "azuz tanned leather" ||
+    name === "gracium" ||
+    name === "icium" ||
+    name === "bubblefoam+" ||
+    name === "blackember mass" ||
+    name === "nerscylla chelicera" ||
+    name === "rey dau fulgurtalon"
   ) {
     return "Material";
   }
@@ -154,8 +200,7 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name.includes(" extract") ||
     name === "gunpowder" ||
     name === "net" ||
-    name.includes("arowana scale") ||
-    name.includes(" barrel")
+    name.includes("arowana scale")
   ) {
     // Added barrel, arowana scale
     return "Ingredient";
@@ -163,19 +208,20 @@ export function categorizeItem(item: ItemData): ItemCategory {
   // Broad natural ingredients
   if (
     name === "raw meat" ||
-    name.includes(" herb") ||
+    name.includes("herb") ||
     name === "honey" ||
-    name.includes(" bug") ||
-    name.includes(" mushroom") ||
-    name.includes(" seed") ||
-    name.includes(" nut") ||
-    name.includes(" berry") ||
-    name.includes(" fern") ||
+    name.includes("bug") ||
+    name.includes("mushroom") ||
+    name.includes("seed") ||
+    name.includes("nut") ||
+    name.includes("berry") ||
+    name.includes("fern") ||
     name === "ivy" ||
-    name.includes(" moss") ||
-    name.includes(" grass") ||
-    name.includes(" flower") ||
-    name.includes(" pepper") ||
+    name.includes("moss") ||
+    name.includes("grass") ||
+    name.includes("flower") ||
+    name.includes("pepper") ||
+    name.includes("weed") ||
     name === "dung" ||
     name === "rolled-up dung" ||
     name === "mandragora" ||
@@ -187,9 +233,6 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "devil's blight" ||
     name === "gloamgrass bud"
   ) {
-    // Added specific names/types
-    // Add specific exclusions if needed (e.g. a material named 'berry')
-    // Check it wasn't caught by Consumable first (e.g. Nulberry check is higher)
     return "Ingredient";
   }
 
