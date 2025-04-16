@@ -28,6 +28,7 @@ export interface Output {
 export type ItemCategory =
   | "Consumable"
   | "Ingredient"
+  | "CookingIngredients"
   | "Material"
   | "Ammo"
   | "SpecialItem"

@@ -1,6 +1,6 @@
 "use server";
 
-import { ItemsTable } from "@/components/items/items";
+import { ItemData } from "@/lib/types/items";
 import { groupItemsByCategory } from "@/lib/utils/itemsUtils";
 
 export default async function GetAllItems() {
@@ -17,7 +17,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Ammo</h2>
         <div className="">
-          {sortedItems.Ammo?.map((item: any) => (
+          {sortedItems.Ammo?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -26,7 +26,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Traps and Slingers</h2>
         <div className="">
-          {sortedItems.TrapsSlinger?.map((item: any) => (
+          {sortedItems.TrapsSlinger?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -35,7 +35,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Tools</h2>
         <div className="">
-          {sortedItems.Tool?.map((item: any) => (
+          {sortedItems.Tool?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -44,7 +44,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Consumable</h2>
         <div className="">
-          {sortedItems.Consumable?.map((item: any) => (
+          {sortedItems.Consumable?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -53,7 +53,16 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Ingredients</h2>
         <div className="">
-          {sortedItems.Ingredient?.map((item: any) => (
+          {sortedItems.Ingredient?.map((item: ItemData) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </div>
+      </div>
+      {/* cooking ingredient */}
+      <div className="flex flex-col gap-4 py-4">
+        <h2 className="text-xl font-bold">Cooking Ingredients</h2>
+        <div className="">
+          {sortedItems.CookingIngredients?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -62,7 +71,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Special Items</h2>
         <div className="">
-          {sortedItems.SpecialItem?.map((item: any) => (
+          {sortedItems.SpecialItem?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -71,7 +80,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Materials</h2>
         <div className="">
-          {sortedItems.Material?.map((item: any) => (
+          {sortedItems.Material?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>
@@ -80,7 +89,7 @@ export default async function GetAllItems() {
       <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Unknown</h2>
         <div className="">
-          {sortedItems.Unknown?.map((item: any) => (
+          {sortedItems.Unknown?.map((item: ItemData) => (
             <li key={item.id}>{item.name}</li>
           ))}
         </div>

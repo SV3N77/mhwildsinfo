@@ -42,9 +42,21 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name.includes("vase") ||
     name.includes("antimite") ||
     name.includes("lantern") ||
+    name.includes("melding") ||
+    name.includes("relic") ||
+    name.includes("sphere") ||
     name === "steel egg" ||
     name === "silver egg" ||
-    name === "gold egg"
+    name === "golden egg" ||
+    name === "wyvern egg" ||
+    name === "oricalcite" ||
+    name === "auric oil" ||
+    name === "crushed crystal" ||
+    name === "cloudy crystal" ||
+    name === "coruscating crystal" ||
+    name === "milky cocoon web" ||
+    name === "wylk pebble" ||
+    name === "wyvernsprout"
   )
     return "SpecialItem"; // e.g., Powercharm, Ghillie Mantle, Mystery Orb, Specklite, Argecite, etc.
 
@@ -63,7 +75,11 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "ez shock trap" ||
     name === "tranq bomb" ||
     name === "smoke bomb" ||
-    name.includes("barrel bomb")
+    name === "poison smoke bomb" ||
+    name === "drugged meat" ||
+    name === "tinged meat" ||
+    name == "poisoned meat" ||
+    name.includes("barrel")
   ) {
     return "TrapsSlinger";
   }
@@ -73,7 +89,8 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "stone" ||
     name === "capture net" ||
     name.includes(" knife") ||
-    name === "tranq blade"
+    name === "tranq blade" ||
+    name === "frostburst"
   ) {
     // Added knife/blade
     return "TrapsSlinger";
@@ -116,7 +133,8 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "ez dust of life" ||
     name === "ez tranq bomb" ||
     name === "ez sonic bomb" ||
-    name === "ez farcaster"
+    name === "ez farcaster" ||
+    name === "charred lizard"
   ) {
     // Catch all EZ items
     return "Consumable";
@@ -187,7 +205,12 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "bubblefoam+" ||
     name === "blackember mass" ||
     name === "nerscylla chelicera" ||
-    name === "rey dau fulgurtalon"
+    name === "rey dau fulgurtalon" ||
+    name === "sinister cloth" ||
+    name === "commission ticket" ||
+    name === "mimiphyta ticket" ||
+    name === "amstrigian ticket" ||
+    name === "great hibiscus"
   ) {
     return "Material";
   }
@@ -231,9 +254,25 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name === "exciteshroom" ||
     name === "chillshroom" ||
     name === "devil's blight" ||
-    name === "gloamgrass bud"
+    name === "gloamgrass bud" ||
+    name === "spider web"
   ) {
     return "Ingredient";
+  }
+
+  if (
+    name.includes("cheese") ||
+    name.includes("shroom") ||
+    name.includes("shrimp") ||
+    name.includes("egg") ||
+    name === "sild garlic" ||
+    name === "specialty sild garlic" ||
+    name === "truffle du conga" ||
+    name === "eastern honey" ||
+    name === "monster chili" ||
+    name === "fresh honey"
+  ) {
+    return "CookingIngredients";
   }
 
   // --- Fallback ---
