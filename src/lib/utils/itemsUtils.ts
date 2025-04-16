@@ -276,7 +276,7 @@ export function categorizeItem(item: ItemData): ItemCategory {
   }
 
   // --- Fallback ---
-  console.warn(`Rule-based fallback for item: ${item.name} (ID: ${item.id}) - categorizing as Unknown.`);
+  // console.warn(`Rule-based fallback for item: ${item.name} (ID: ${item.id}) - categorizing as Unknown.`);
   return "Unknown";
 }
 
