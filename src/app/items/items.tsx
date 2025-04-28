@@ -77,15 +77,6 @@ export default async function GetAllItems() {
             ))}
           </div>
         </div>
-        {/* material */}
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Materials</h2>
-          <div className="">
-            {sortedItems.Material?.map((item: ItemData) => (
-              <li key={item.id}>{item.name}</li>
-            ))}
-          </div>
-        </div>
 
         {/* <div className="flex flex-col gap-4 py-4">
         <h2 className="text-xl font-bold">Unknown</h2>
@@ -96,6 +87,15 @@ export default async function GetAllItems() {
         </div>
       </div> */}
       </section>
+      {/* material */}
+      <div className="flex flex-col gap-4 py-4">
+        <h2 className="text-xl font-bold">Materials</h2>
+        <div className="grid grid-cols-4 gap-4">
+          {sortedItems.Material?.map((item: ItemData) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
