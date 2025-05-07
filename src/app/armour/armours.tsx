@@ -5,6 +5,7 @@ import Pieces from "@/components/armour/pieces";
 import Resistances from "@/components/armour/resistances";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArmourSetData } from "@/lib/types/armour";
+import Link from "next/link";
 
 export default async function GetAllArmour() {
   const res = await fetch("https://wilds.mhdb.io/en/armor/sets");
@@ -24,6 +25,7 @@ export default async function GetAllArmour() {
                 <Defense armour={armour} />
                 <Resistances armour={armour} />
                 <Pieces pieces={armour.pieces} />
+                <Link href={`/armour/${armour.id}`}>View more</Link>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

@@ -1,5 +1,5 @@
 import { TopBar } from "@/components/topBar";
-import GetAllArmour from "./armour";
+import GetAllArmour from "./armours";
 
 export default function ArmourPage() {
   return (
