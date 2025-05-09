@@ -52,7 +52,7 @@ export default function Home() {
         <section className="mb-12">
           <h1 className="text-4xl font-bold mb-4">Info on Monster Hunter Wilds Items</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Can look through the items and their stats, and also see the item{`&apos`}s rarity and price.
+            Can look through the items and their stats, and also see the item's rarity and price.
           </p>
         </section>
 

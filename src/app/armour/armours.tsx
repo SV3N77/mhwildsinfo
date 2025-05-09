@@ -25,7 +25,9 @@ export default async function GetAllArmour() {
                 <Defense armour={armour} />
                 <Resistances armour={armour} />
                 <Pieces pieces={armour.pieces} />
-                <Link href={`/armour/${armour.id}`}>View more</Link>
+                <Link href={`/armour/${armour.id}`} className="ml-auto">
+                  View information
+                </Link>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
