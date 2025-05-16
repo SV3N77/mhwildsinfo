@@ -4,12 +4,12 @@ import Defense from "@/components/armour/defense";
 import Pieces from "@/components/armour/pieces";
 import Resistances from "@/components/armour/resistances";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ArmourSetData } from "@/lib/types/armour";
+import { ArmorSetData } from "@/lib/types/armour";
 import Link from "next/link";
 
 export default async function GetAllArmour() {
   const res = await fetch("https://wilds.mhdb.io/en/armor/sets");
-  const data = (await res.json()) as ArmourSetData[];
+  const data = (await res.json()) as ArmorSetData[];
   // Sort the armour by name
   const sortedDataArmour = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
   /* TODO: add images when API updates with images*/
@@ -17,7 +17,7 @@ export default async function GetAllArmour() {
     <div className="flex flex-col px-20 py-10">
       <h1 className="text-4xl font-bold mb-5">Armor List</h1>
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
-        {sortedDataArmour.map((armour: ArmourSetData) => (
+        {sortedDataArmour.map((armour: ArmorSetData) => (
           <Accordion key={armour.id} type="single" collapsible className="w-full max-w-md mx-auto">
             <AccordionItem value={`${armour.id}`} className="border border-gray-300 rounded-lg shadow-md">
               <AccordionTrigger className="p-4 text-base font-semibold">{armour.name}</AccordionTrigger>
