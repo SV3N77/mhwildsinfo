@@ -3,7 +3,6 @@
 import Defense from "@/components/armour/defense";
 import Pieces from "@/components/armour/pieces";
 import Resistances from "@/components/armour/resistances";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArmorSetData } from "@/lib/types/armour";
 import Link from "next/link";
 
@@ -18,19 +17,15 @@ export default async function GetAllArmour() {
       <h1 className="text-4xl font-bold mb-5">Armor List</h1>
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
         {sortedDataArmour.map((armour: ArmorSetData) => (
-          <Accordion key={armour.id} type="single" collapsible className="w-full max-w-md mx-auto">
-            <AccordionItem value={`${armour.id}`} className="border border-gray-300 rounded-lg shadow-md">
-              <AccordionTrigger className="p-4 text-base font-semibold">{armour.name}</AccordionTrigger>
-              <AccordionContent className="p-4 bg-gray-50 rounded-b-lg flex flex-col gap-3">
-                <Defense armour={armour} />
-                <Resistances armour={armour} />
-                <Pieces pieces={armour.pieces} />
-                <Link href={`/armour/${armour.id}`} className="ml-auto">
-                  View information
-                </Link>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <div key={armour.id} className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col">
+            <div className="text-2xl font-semibold mb-2">{armour.name}</div>
+            <Defense armour={armour} />
+            <Resistances armour={armour} />
+            <Pieces pieces={armour.pieces} />
+            <Link href={`/armour/${armour.id}`} className="ml-auto text-sm">
+              View more information
+            </Link>
+          </div>
         ))}
       </section>
     </div>
