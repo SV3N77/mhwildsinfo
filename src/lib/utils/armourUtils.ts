@@ -1,4 +1,11 @@
-import { ArmorSetData, DisplayStat, Resistances } from "../types/armour";
+import {
+  AggregatedMaterial,
+  ArmorSetData,
+  CraftingItemDetail,
+  DisplayStat,
+  Resistances,
+  TotalArmorSetCost,
+} from "../types/armour";
 import { capitalizeFirstLetter } from "./util";
 
 /* Armour Utils */
@@ -76,50 +83,50 @@ export function getFormattedResistances(armourSetData: ArmorSetData): DisplaySta
 
 // todo add the total zenny cost and the total materials
 
-// export function calculateFullArmorSetCost(armorSet: ArmorSet): TotalArmorSetCost {
-//   let totalZenny = 0;
-//   const materialMap = new Map<number, { itemDetail: CraftingItemDetail; quantity: number }>();
+export function calculateFullArmorSetCost(armorSet: ArmorSetData): TotalArmorSetCost {
+  let totalZenny = 0;
+  const materialMap = new Map<number, { itemDetail: CraftingItemDetail; quantity: number }>();
 
-//   // Iterate over each armor piece within the armorSet.pieces array
-//   if (armorSet && armorSet.pieces) {
-//     // Check if armorSet and pieces exist
-//     for (const piece of armorSet.pieces) {
-//       if (piece.crafting) {
-//         // Add Zenny cost
-//         totalZenny += piece.crafting.zennyCost || 0;
+  // Iterate over each armor piece within the armorSet.pieces array
+  if (armorSet && armorSet.pieces) {
+    // Check if armorSet and pieces exist
+    for (const piece of armorSet.pieces) {
+      if (piece.crafting) {
+        // Add Zenny cost
+        totalZenny += piece.crafting.zennyCost || 0;
 
-//         // Aggregate materials
-//         if (piece.crafting.materials && piece.crafting.materials.length > 0) {
-//           for (const materialReq of piece.crafting.materials) {
-//             const itemId = materialReq.item.id;
-//             const currentMaterial = materialMap.get(itemId);
+        // Aggregate materials
+        if (piece.crafting.materials && piece.crafting.materials.length > 0) {
+          for (const materialReq of piece.crafting.materials) {
+            const itemId = materialReq.item.id;
+            const currentMaterial = materialMap.get(itemId);
 
-//             if (currentMaterial) {
-//               currentMaterial.quantity += materialReq.quantity;
-//             } else {
-//               materialMap.set(itemId, {
-//                 itemDetail: materialReq.item,
-//                 quantity: materialReq.quantity,
-//               });
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
+            if (currentMaterial) {
+              currentMaterial.quantity += materialReq.quantity;
+            } else {
+              materialMap.set(itemId, {
+                itemDetail: materialReq.item,
+                quantity: materialReq.quantity,
+              });
+            }
+          }
+        }
+      }
+    }
+  }
 
-//   const totalMaterials: AggregatedMaterial[] = [];
-//   for (const [_id, data] of materialMap) {
-//     totalMaterials.push({
-//       item: data.itemDetail,
-//       quantity: data.quantity,
-//     });
-//   }
+  const totalMaterials: AggregatedMaterial[] = [];
+  for (const [_id, data] of materialMap) {
+    totalMaterials.push({
+      item: data.itemDetail,
+      quantity: data.quantity,
+    });
+  }
 
-//   totalMaterials.sort((a, b) => a.item.id - b.item.id);
+  totalMaterials.sort((a, b) => a.item.id - b.item.id);
 
-//   return {
-//     totalZenny,
-//     totalMaterials,
-//   };
-// }
+  return {
+    totalZenny,
+    totalMaterials,
+  };
+}

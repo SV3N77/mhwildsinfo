@@ -10,7 +10,7 @@ export interface MinimalIdRef {
 }
 
 // --- Interfaces for Armor Piece Crafting ---
-export interface CraftingItem {
+export interface CraftingItemDetail {
   id: number;
   gameId: number;
   rarity: number;
@@ -23,7 +23,7 @@ export interface CraftingItem {
 }
 
 export interface CraftingMaterial {
-  item: CraftingItem;
+  item: CraftingItemDetail;
   quantity: number;
   id: number; // ID of the material requirement entry
 }
@@ -137,4 +137,14 @@ export interface ArmorSetData {
 export interface DisplayStat {
   label: string; // e.g., "Fire Resistance"
   value: number; // The calculated numeric value
+}
+
+export interface AggregatedMaterial {
+  item: CraftingItemDetail;
+  quantity: number;
+}
+
+export interface TotalArmorSetCost {
+  totalZenny: number;
+  totalMaterials: AggregatedMaterial[];
 }
