@@ -16,34 +16,33 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
     return <div>No decorations data available.</div>;
   }
   const [search, setSearch] = useState("");
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   // Set loading to true briefly when search changes
   useEffect(() => {
-    if (search !== debouncedSearch && search.length > 2) {
+    if (search.length > 2) {
       setLoading(true);
+      const timeout = setTimeout(() => {
+        setLoading(false);
+      }, 300);
+      return () => clearTimeout(timeout);
     } else {
-      setLoading(false); // Immediately turn off loading if search is empty or identical
+      setLoading(false);
     }
-
-    const timeout = setTimeout(() => {
-      setDebouncedSearch(search);
-    }, 300); // adjust delay if needed
-
-    return () => clearTimeout(timeout);
-  }, [search, debouncedSearch]);
-
-  const showSkeletons = loading && debouncedSearch.length > 0;
+  }, [search]);
 
   const filteredDecorations = useMemo(() => {
-    if (debouncedSearch === "") {
+    if (search === "") {
       return decorations;
     }
-    return decorations.filter((item) => item.name.toLowerCase().includes(debouncedSearch.toLowerCase()));
-  }, [debouncedSearch, decorations]);
+    if (search.length < 3) {
+      return decorations;
+    }
+    return decorations.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+  }, [search, decorations]);
 
-  const isCurrentlySearching = search.length > 0;
+  const isSearching = search.length > 0;
   const hasResults = filteredDecorations.length > 0;
 
   return (
@@ -60,7 +59,7 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {showSkeletons ? (
+          {loading ? (
             Array.from({ length: 5 }).map((_, index) => (
               <TableRow key={index}>
                 <TableCell className="border px-4 py-2 font-medium">
@@ -80,7 +79,7 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
                 </TableCell>
               </TableRow>
             ))
-          ) : isCurrentlySearching && !hasResults ? (
+          ) : isSearching && !hasResults ? (
             <TableRow className="text-center py-8 text-muted-foreground">
               <TableCell colSpan={5}>
                 <div className="col-span-full text-center py-8 text-muted-foreground">
