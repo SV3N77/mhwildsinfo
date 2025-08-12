@@ -63,7 +63,7 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
             Array.from({ length: 5 }).map((_, index) => (
               <TableRow key={index}>
                 <TableCell className="border px-4 py-2 font-medium">
-                  <Skeleton className="h-4 w-[150px]" /> {/* Adjust width as needed */}
+                  <Skeleton className="h-4 w-[150px]" />
                 </TableCell>
                 <TableCell className="border px-4 py-2 text-center">
                   <Skeleton className="h-4 w-[50px] mx-auto" />

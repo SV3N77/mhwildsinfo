@@ -28,7 +28,7 @@ export default async function ArmourSet({ id }: { id: string }) {
                 </div>
               ))}
             </div>
-            <div className="font-bold">Total Cost: {totalCost.totalZenny}</div>
+            <p className="font-bold">Total Cost: {totalCost.totalZenny}</p>
           </div>
           <div className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col gap-3">
             <Defense armour={armourSet} />

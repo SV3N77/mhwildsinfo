@@ -62,17 +62,7 @@ export default function Home() {
               <Link href={card.link} key={card.title} className="block h-full">
                 <Card className="h-full transition-all hover:shadow-md hover:translate-y-[-4px]">
                   <CardHeader className={`rounded-t-lg ${card.color}`}>
-                    <div className="flex items-center gap-3 py-3">
-                      {/* Icon */}
-                      <Image
-                        src={card.icon || "/images/placeholder.png"}
-                        alt={card.title}
-                        width={40}
-                        height={40}
-                        className="rounded-md"
-                      />
-                      <CardTitle>{card.title}</CardTitle>
-                    </div>
+                    <CardTitle className="py-3 text-xl font-bold">{card.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="pt-4">
                     <CardDescription className="text-base">{card.description}</CardDescription>
