@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { TopBar } from "@/components/topBar";
 
 // Navigation card data
 const navigationCards = [
@@ -46,8 +45,6 @@ const navigationCards = [
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <TopBar />
-
       <main className="flex-1 container mx-auto px-4 py-8">
         <section className="mb-12">
           <h1 className="text-4xl font-bold mb-4">Info on Monster Hunter Wilds Items</h1>
