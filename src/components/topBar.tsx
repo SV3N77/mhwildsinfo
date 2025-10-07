@@ -6,10 +6,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-const menuItems = [
-  { name: "Home", href: "/" },
-  { name: "Search", href: "/search" },
-];
+const menuItems = [{ name: "Home", href: "/" }];
 
 export function TopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,5 +1,7 @@
 "use server";
 
+import Link from "next/link";
+
 export default async function GetAllMonsters() {
   const res = await fetch("https://wilds.mhdb.io/en/monsters");
   const data = await res.json();
@@ -11,12 +13,16 @@ export default async function GetAllMonsters() {
       <h1 className="text-2xl font-bold pb-4">Monsters List</h1>
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
         {sortedMonsters.map((monster: any) => (
-          <div key={monster.id} className="border border-gray-300 rounded-lg shadow-md">
+          <Link
+            href={`/monsters/${monster.id}`}
+            key={monster.id}
+            className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col gap-3"
+          >
             <div className="p-4">
               <h2 className="text-xl font-bold">{monster.name}</h2>
               <p className="text-muted-foreground">{monster.description}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </section>
     </div>
