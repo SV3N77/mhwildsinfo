@@ -1,80 +1,99 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield, Sparkles, Package, Sword, Skull } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Navigation card data
 const navigationCards = [
   {
     title: "Armour Sets",
-    description: "A list of all the armour sets in the game",
-    icon: "",
+    description: "Browse all armour sets with stats, resistances, and set bonuses",
+    icon: Shield,
     link: "/armour",
-    color: "bg-green-100",
+    accentColor: "from-emerald-500/20 to-emerald-600/5",
+    iconColor: "text-emerald-400",
+    borderColor: "hover:border-emerald-500/50",
   },
   {
     title: "Decorations",
-    description: "A list of all the decorations in the game",
-    icon: "",
+    description: "Find decorations to enhance your build with powerful skills",
+    icon: Sparkles,
     link: "/decorations",
-    color: "bg-purple-100",
+    accentColor: "from-violet-500/20 to-violet-600/5",
+    iconColor: "text-violet-400",
+    borderColor: "hover:border-violet-500/50",
   },
   {
     title: "Items",
-    description: "A list of all the items in the game",
-    icon: "",
+    description: "Complete item database with rarity, prices, and crafting info",
+    icon: Package,
     link: "/items",
-    color: "bg-amber-100 ",
+    accentColor: "from-amber-500/20 to-amber-600/5",
+    iconColor: "text-amber-400",
+    borderColor: "hover:border-amber-500/50",
   },
   {
     title: "Weapons",
-    description: "A list of all the weapons in the game",
-    icon: "",
+    description: "Explore weapons with damage stats, sharpness, and skills",
+    icon: Sword,
     link: "/weapons",
-    color: "bg-rose-100 ",
+    accentColor: "from-rose-500/20 to-rose-600/5",
+    iconColor: "text-rose-400",
+    borderColor: "hover:border-rose-500/50",
   },
   {
     title: "Monsters",
-    description: "A list of all the monsters in the game",
-    icon: "",
+    description: "Monster database with weaknesses, drops, and hunt info",
+    icon: Skull,
     link: "/monsters",
-    color: "bg-blue-100",
+    accentColor: "from-sky-500/20 to-sky-600/5",
+    iconColor: "text-sky-400",
+    borderColor: "hover:border-sky-500/50",
   },
 ];
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 container mx-auto px-4 py-8">
-        <section className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">Info on Monster Hunter Wilds Items</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Can look through the items and their stats, and also see the item's rarity and price.
+      <main className="flex-1 container mx-auto px-4 py-12">
+        <section className="mb-16 text-center">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+            Monster Hunter Wilds Info
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Your comprehensive guide to armour, weapons, items, decorations, and monsters.
+            Everything you need to master the hunt.
           </p>
         </section>
 
         <section>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {navigationCards.map((card) => (
-              <Link href={card.link} key={card.title} className="block h-full">
-                <Card className="h-full transition-all hover:shadow-md hover:translate-y-[-4px]">
-                  <CardHeader className={`rounded-t-lg ${card.color}`}>
-                    <CardTitle className="py-3 text-xl font-bold">{card.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-4">
-                    <CardDescription className="text-base">{card.description}</CardDescription>
-                  </CardContent>
-                  <CardFooter>
-                    <div className="flex items-center text-sm text-primary font-medium">
-                      Explore <ArrowRight className="ml-1 h-4 w-4" />
-                    </div>
-                  </CardFooter>
-                </Card>
-              </Link>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {navigationCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <Link href={card.link} key={card.title} className="group">
+                  <Card className={`h-full transition-all duration-300 hover:translate-y-[-2px] border-border/50 ${card.borderColor} overflow-hidden relative`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${card.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0`} />
+                    <CardHeader className="relative pb-2 z-10">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg bg-secondary/50 ${card.iconColor}`}>
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <CardTitle className="text-lg font-semibold">{card.title}</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="relative pt-2 z-10">
+                      <CardDescription className="text-sm leading-relaxed">{card.description}</CardDescription>
+                    </CardContent>
+                    <CardFooter className="relative pt-4 z-10">
+                      <div className={`flex items-center text-sm font-medium ${card.iconColor} group-hover:gap-2 gap-1 transition-all`}>
+                        Explore <ArrowRight className="h-4 w-4" />
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </section>
-        <section></section>
       </main>
     </div>
   );
