@@ -1,5 +1,5 @@
 import GetAllItems from "./items";
 
-export default function DecorationsPage() {
+export default function ItemsPage() {
   return <GetAllItems />;
 }

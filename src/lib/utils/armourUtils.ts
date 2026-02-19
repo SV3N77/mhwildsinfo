@@ -6,7 +6,7 @@ import {
   Resistances,
   TotalArmorSetCost,
 } from "../types/armour";
-import { capitalizeFirstLetter } from "./util";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 /* Armour Utils */
 export function calculateTotalBaseDefense(armourSetData: ArmorSetData): number {
