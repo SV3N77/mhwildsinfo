@@ -1,19 +1,27 @@
+export interface IconInfo {
+  id: number;
+  kind: string;
+  colorId: number;
+  color: string;
+}
+
 export interface ItemData {
-  rarity: number;
-  name: string;
-  description: string;
-  value: number;
-  carryLimit: number;
-  recipes: Recipe[];
   id: number;
   gameId: number;
+  name: string;
+  description: string;
+  rarity: number;
+  carryLimit: number;
+  value: number;
+  recipes: Recipe[];
+  icon: IconInfo;
 }
 
 export interface Recipe {
-  output: Output;
-  amount: number;
-  inputs: Input[];
   id: number;
+  output: { id: number };
+  amount: number;
+  inputs: ItemData[];
 }
 
 export interface Input {

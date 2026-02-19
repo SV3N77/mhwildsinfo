@@ -91,45 +91,61 @@ interface WeaponSeriesInfo {
 
 // --- Main Weapon Data Interface ---
 export interface WeaponData {
-  id: number; // Primary weapon ID
+  id: number;
   gameId: number;
   name: string;
   description: string;
   rarity: number;
-  kind: string; // e.g., "bow", "great-sword"
-  coatings?: string[]; // Optional: Specific to bows/bowguns
+  kind: string;
   damage: DamageInfo;
   affinity: number;
   defenseBonus: number;
-  elderseal: string | null; // e.g., "low", "average", "high", or null
-  slots: number[]; // Decoration slots, numbers indicate level (e.g., [3, 2, 0])
-  specials: SpecialDamageInfo[]; // Elemental/Status effects
-  skills: WeaponSkillInfo[]; // Built-in skills
-  crafting: CraftingInfo; // Crafting and upgrade details
-  series: WeaponSeriesInfo; // Weapon tree/series info
+  elderseal: string | null;
+  slots: number[];
+  specials: SpecialDamageInfo[];
+  skills: WeaponSkillInfo[];
+  crafting: CraftingInfo;
+  series: WeaponSeriesInfo;
+}
+
+export interface Sharpness {
+  red: number;
+  orange: number;
+  yellow: number;
+  green: number;
+  blue: number;
+  white: number;
+  purple: number;
+}
+
+export interface Handicraft {
+  red: number;
+  orange: number;
+  yellow: number;
+  green: number;
+  blue: number;
+  white: number;
+  purple: number;
 }
 
 // Define the exact category names using 'as const' for strong typing
 export const weaponCategories = [
-  "GreatSword",
-  "SwordandShield",
-  "Hammer",
-  "LongSword",
-  "Lance",
-  "Gunlance",
-  "DualBlades",
-  "SwitchAxe",
-  "ChargeBlade",
-  "InsectGlaive",
-  "HuntingHorn",
-  "Bow",
-  "LightBowgun",
-  "HeavyBowgun",
-] as const; // 'as const' makes it a tuple of string literals
+  "great-sword",
+  "sword-and-shield",
+  "hammer",
+  "long-sword",
+  "lance",
+  "gunlance",
+  "dual-blades",
+  "switch-axe",
+  "charge-blade",
+  "insect-glaive",
+  "hunting-horn",
+  "bow",
+  "light-bowgun",
+  "heavy-bowgun",
+] as const;
 
-// Derive the WeaponCategory type from the array of string literals
 export type WeaponCategory = (typeof weaponCategories)[number];
 
-// Define the type for the final grouped object
-// Record<WeaponCategory, WeaponData[]> ensures all categories exist as keys
 export type GroupedWeapons = Record<WeaponCategory, WeaponData[]>;

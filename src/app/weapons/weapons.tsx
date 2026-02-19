@@ -15,7 +15,7 @@ export default async function GetAllWeapons() {
       <section>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Great Sword</h2>
-          {groupedWeapons.GreatSword?.map((weapon: WeaponData) => (
+          {groupedWeapons["great-sword"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -23,7 +23,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Sword and Shield</h2>
-          {groupedWeapons.SwordandShield?.map((weapon: WeaponData) => (
+          {groupedWeapons["sword-and-shield"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -31,7 +31,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Hammer</h2>
-          {groupedWeapons.Hammer?.map((weapon: WeaponData) => (
+          {groupedWeapons.hammer?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -39,7 +39,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Long Sword</h2>
-          {groupedWeapons.LongSword?.map((weapon: WeaponData) => (
+          {groupedWeapons["long-sword"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -47,7 +47,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Lance</h2>
-          {groupedWeapons.Lance?.map((weapon: WeaponData) => (
+          {groupedWeapons.lance?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -55,7 +55,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Gunlance</h2>
-          {groupedWeapons.Gunlance?.map((weapon: WeaponData) => (
+          {groupedWeapons.gunlance?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -63,7 +63,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Dual Blades</h2>
-          {groupedWeapons.DualBlades?.map((weapon: WeaponData) => (
+          {groupedWeapons["dual-blades"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -71,7 +71,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Switch Axe</h2>
-          {groupedWeapons.SwitchAxe?.map((weapon: WeaponData) => (
+          {groupedWeapons["switch-axe"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -79,7 +79,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Charge Blade</h2>
-          {groupedWeapons.ChargeBlade?.map((weapon: WeaponData) => (
+          {groupedWeapons["charge-blade"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -87,7 +87,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Insect Glaive</h2>
-          {groupedWeapons.InsectGlaive?.map((weapon: WeaponData) => (
+          {groupedWeapons["insect-glaive"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -95,7 +95,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Hunting Horn</h2>
-          {groupedWeapons.HuntingHorn?.map((weapon: WeaponData) => (
+          {groupedWeapons["hunting-horn"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -103,7 +103,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Bow</h2>
-          {groupedWeapons.Bow?.map((weapon: WeaponData) => (
+          {groupedWeapons.bow?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -111,7 +111,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Light Bowgun</h2>
-          {groupedWeapons.LightBowgun?.map((weapon: WeaponData) => (
+          {groupedWeapons["light-bowgun"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>
@@ -119,7 +119,7 @@ export default async function GetAllWeapons() {
         </div>
         <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl font-bold">Heavy Bowgun</h2>
-          {groupedWeapons.HeavyBowgun?.map((weapon: WeaponData) => (
+          {groupedWeapons["heavy-bowgun"]?.map((weapon: WeaponData) => (
             <li key={weapon.id} className="">
               {weapon.name}
             </li>

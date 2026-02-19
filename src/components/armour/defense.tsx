@@ -1,17 +1,21 @@
-import { ArmourSetData } from "@/lib/types/armour";
+import { ArmorSetData } from "@/lib/types/armour";
 import { calculateTotalBaseDefense } from "@/lib/utils/armourUtils";
+import { Shield } from "lucide-react";
 
 interface DefenseProps {
-  armour: ArmourSetData;
+  armour: ArmorSetData;
 }
 
 export default function Defense({ armour }: DefenseProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <div className="text-lg font-semibold">Defense</div>
-      <div className="flex justify-between items-center">
-        <div>Lv 1</div>
-        <div>{calculateTotalBaseDefense(armour)}</div>
+    <div className="space-y-2">
+      <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+        <Shield className="h-4 w-4" />
+        <span>Defense</span>
+      </div>
+      <div className="flex items-center justify-between px-2 py-1.5 rounded-md bg-secondary/50">
+        <span className="text-sm text-muted-foreground">Lv 1</span>
+        <span className="text-lg font-bold text-foreground">{calculateTotalBaseDefense(armour)}</span>
       </div>
     </div>
   );

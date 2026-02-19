@@ -74,22 +74,42 @@ export interface MonsterSize {
   gold: number;
 }
 
+
+
+
+
+
+
 export interface Location {
   id: number;
   gameId: number;
   name: string;
   zoneCount: number;
+  camps: Camp[];
 }
 
-// Reward / condition types
+export interface Camp {
+  id: number;
+  location: { id: number };
+  name: string;
+  zone: number;
+  floor: number;
+  risk: "safe" | "insecure" | "dangerous";
+  position: { x: number; y: number; z: number };
+  gameId: number;
+}
+
 export interface MonsterRewardCondition {
+  id: number;
   kind: string;
   rank: Rank;
   quantity: number;
   chance: number;
   part?: number;
 }
+
 export interface MonsterReward {
+  id: number;
   item: {
     id: number;
     gameId: number;
@@ -102,7 +122,6 @@ export interface MonsterReward {
   conditions: MonsterRewardCondition[];
 }
 
-// Monster parts
 export interface MonsterPart {
   id: number;
   kind: string;
@@ -121,7 +140,6 @@ export interface MonsterPart {
   kinsectEssence: string | null;
 }
 
-// Main Monster type
 export interface Monster {
   id: number;
   gameId: number;

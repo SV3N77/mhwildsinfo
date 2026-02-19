@@ -1,8 +1,10 @@
+type Rank = "low" | "high" | "master";
+
 export interface IconInfo {
   id: number;
   kind: string;
-  colorId?: number; // Optional as seen in material item icons
-  color?: string; // Optional as seen in material item icons
+  colorId?: number;
+  color?: string;
 }
 
 export interface MinimalIdRef {
@@ -78,34 +80,34 @@ export interface DefenseStats {
 }
 
 export interface ArmorPiece {
+  id: number;
+  gameId: number;
   kind: string;
   name: string;
   description: string;
-  rank: string;
+  rank: Rank;
   rarity: number;
   resistances: Resistances;
   defense: DefenseStats;
   skills: ArmorPieceAttachedSkill[];
-  slots: (number | null)[];
+  slots: number[];
   armorSet: MinimalIdRef;
   crafting: ArmorPieceCraftingDetails;
-  id: number;
 }
 
 // --- Interfaces for Armor Set Bonuses ---
 export interface GroupBonusAppliedSkill {
   id: number;
-  skill: MinimalIdRef; // Was your 'Skill6'
+  skill: { id: number; name: string };
   level: number;
-  name: string | null; // Added based on JSON example (was "Fortify")
   description: string;
 }
 
 export interface GroupBonusRank {
+  id: number;
   bonus: MinimalIdRef;
   pieces: number;
-  skill: GroupBonusAppliedSkill;
-  id: number;
+  skill: { id: number; skill: MinimalIdRef; level: number; description: string };
 }
 
 export interface GroupBonusDefinition {
@@ -117,21 +119,15 @@ export interface GroupBonusDefinition {
   ranks: GroupBonusRank[];
 }
 
-// Assuming 'bonus' (if not null) would have a similar structure to GroupBonusDefinition
-// You might want to create a more generic 'ArmorSetBonusDefinition' if they are very similar
-// For now, specific to what was provided for groupBonus:
-export type ArmorSetBonus = GroupBonusDefinition; // Alias or define separately if different
+export type ArmorSetBonus = GroupBonusDefinition;
 
-// --- Main Armor Set Data Interface ---
 export interface ArmorSetData {
-  // Renamed from your 'ArmourSetData' for consistency
+  id: number;
+  gameId: number;
   name: string;
   pieces: ArmorPiece[];
-  bonus: ArmorSetBonus | null; // Example showed null, allow defined structure or null
-  groupBonus: GroupBonusDefinition | null; // Allow null if it can be missing
-  id: number;
-  // gameId: number; // The top-level armor set object in the example did NOT have a gameId.
-  // If your structure can have it, add 'gameId?: number;'
+  bonus: ArmorSetBonus | null;
+  groupBonus: GroupBonusDefinition | null;
 }
 
 export interface DisplayStat {

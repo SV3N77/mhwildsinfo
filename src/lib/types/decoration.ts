@@ -1,6 +1,12 @@
+interface DecorationIcon {
+  color: string;
+  colorId: number;
+}
+
 interface DecorationSkillInfo {
   skill: {
     id: number;
+    gameId: number;
     name: string;
   };
   level: number;
@@ -10,6 +16,7 @@ interface DecorationSkillInfo {
 
 export interface DecorationData {
   id: number;
+  gameId: number;
   name: string;
   description: string;
   value?: number;
@@ -17,5 +24,5 @@ export interface DecorationData {
   rarity: number;
   kind: string;
   skills?: DecorationSkillInfo[];
-  gameId: number;
+  icon: DecorationIcon;
 }
