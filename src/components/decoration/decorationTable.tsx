@@ -5,6 +5,7 @@ import type { DecorationData } from "@/lib/types/decoration";
 import { useEffect, useMemo, useState } from "react";
 import { Input } from "../ui/input";
 import { Skeleton } from "../ui/skeleton";
+import { ChevronDown, ChevronUp, ChevronsUpDown } from "lucide-react";
 
 interface DecorationsTableProps {
   decorations: DecorationData[];
@@ -46,7 +47,13 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
     if (search.length < 3) {
       return decorations;
     }
-    return decorations.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+    return decorations.filter(
+      (item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.rarity.toString().includes(search.toLowerCase()) ||
+        item.slot.toString().includes(search.toLowerCase()) ||
+        item.kind.toLowerCase().includes(search.toLowerCase())
+    );
   }, [search, decorations]);
 
   // filters for the decorations table
@@ -81,17 +88,21 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
 
   const getSortIndicator = (columnKey: keyof DecorationData) => {
     if (sortConfig.key === columnKey) {
-      return sortConfig.direction === "ascending" ? " ▲" : " ▼";
+      return sortConfig.direction === "ascending" ? (
+        <ChevronUp className="ml-1 h-4 w-4" />
+      ) : (
+        <ChevronDown className="ml-1 h-4 w-4" />
+      );
     }
 
-    return <span className="text-muted-foreground/60"> ↕</span>;
+    return <ChevronsUpDown className="ml-1 h-4 w-4 text-muted-foreground/60" />;
   };
   const isSearching = search.length > 0;
   const hasResults = filteredDecorations.length > 0;
 
   return (
     <div className="flex flex-col gap-4">
-      <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search for decoration" />
+      <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search decorations..." />
       <Table className="border">
         <TableHeader>
           <TableRow>
@@ -99,25 +110,33 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
               className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("name")}
             >
-              Name{getSortIndicator("name")}
+              <div className="flex items-center">
+                Name{getSortIndicator("name")}
+              </div>
             </TableHead>
             <TableHead
-              className="border px-4 py-2 text-center cursor-pointer hover:bg-muted/50"
+              className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("rarity")}
             >
-              Rarity{getSortIndicator("rarity")}
+              <div className="flex items-center justify-center">
+                Rarity{getSortIndicator("rarity")}
+              </div>
             </TableHead>
             <TableHead
-              className="border px-4 py-2 text-center cursor-pointer hover:bg-muted/50"
+              className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("slot")}
             >
-              Slot{getSortIndicator("slot")}
+              <div className="flex items-center justify-center">
+                Slot{getSortIndicator("slot")}
+              </div>
             </TableHead>
             <TableHead
               className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("kind")}
             >
-              Kind{getSortIndicator("kind")}
+              <div className="flex items-center">
+                Kind{getSortIndicator("kind")}
+              </div>
             </TableHead>
             <TableHead className="border px-4 py-2">Description</TableHead>
           </TableRow>

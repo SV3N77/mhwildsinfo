@@ -17,6 +17,9 @@ Monster Hunter Wilds information website built with modern web technologies to d
 ### NEVER RUN BUILD
 ⚠️ **IMPORTANT**: The dev server is already running. Do NOT run `yarn build` or any build commands. The dev server handles hot-reloading automatically.
 
+### DO NOT RUN ESLINT AUTOMATICALLY
+⚠️ **IMPORTANT**: Do NOT run `yarn lint` automatically after every change. Only run linting when explicitly requested or before committing. The dev server handles hot-reloading without lint checks.
+
 ## Available Commands
 
 ```bash
@@ -180,9 +183,9 @@ import { SomeType } from '@/lib/types/types'
 ## Development Workflow
 
 1. Make code changes
-2. Dev server automatically hot-reloads (no build needed)
+2. Dev server automatically hot-reloads (no build or linting needed)
 3. Test changes in browser at http://localhost:3000
-4. Run `yarn lint` before committing to check for issues
+4. Run `yarn lint` only when explicitly requested or before committing
 
 ## Notes
 
