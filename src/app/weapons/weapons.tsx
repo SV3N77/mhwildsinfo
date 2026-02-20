@@ -1,130 +1,146 @@
 "use server";
 
-import { WeaponData } from "@/lib/types/weapon";
+import { WeaponData, weaponCategories, WeaponCategory } from "@/lib/types/weapon";
 import { groupWeaponsByType } from "@/lib/utils/weaponUtils";
+import { rarityColors } from "@/lib/utils/rarityColors";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Swords } from "lucide-react";
+
+const weaponTypeNames: Record<WeaponCategory, string> = {
+  "great-sword": "Great Sword",
+  "sword-and-shield": "Sword and Shield",
+  "hammer": "Hammer",
+  "long-sword": "Long Sword",
+  "lance": "Lance",
+  "gunlance": "Gunlance",
+  "dual-blades": "Dual Blades",
+  "switch-axe": "Switch Axe",
+  "charge-blade": "Charge Blade",
+  "insect-glaive": "Insect Glaive",
+  "hunting-horn": "Hunting Horn",
+  "bow": "Bow",
+  "light-bowgun": "Light Bowgun",
+  "heavy-bowgun": "Heavy Bowgun",
+};
+
+const elementColors: Record<string, string> = {
+  fire: "text-red-500",
+  water: "text-blue-500",
+  thunder: "text-yellow-500",
+  ice: "text-cyan-400",
+  dragon: "text-purple-500",
+  poison: "text-green-600",
+  paralysis: "text-yellow-300",
+  sleep: "text-indigo-400",
+  blast: "text-orange-400",
+  stun: "text-yellow-200",
+};
 
 export default async function GetAllWeapons() {
   const res = await fetch("https://wilds.mhdb.io/en/weapons");
   const data = await res.json();
-  // Group weapons by type
   const groupedWeapons = groupWeaponsByType(data);
 
   return (
-    <div className="flex flex-col px-20 py-10">
-      <h1 className="text-2xl font-bold">Weapons List</h1>
+    <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="p-2 rounded-lg bg-primary/10 text-primary">
+            <Swords className="h-6 w-6" />
+          </div>
+          <h1 className="text-4xl font-bold">Weapons</h1>
+        </div>
+        <p className="text-muted-foreground">
+          Browse all weapons with their attack, affinity, rarity, and special properties
+        </p>
+      </div>
+
       <section>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Great Sword</h2>
-          {groupedWeapons["great-sword"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Sword and Shield</h2>
-          {groupedWeapons["sword-and-shield"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Hammer</h2>
-          {groupedWeapons.hammer?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Long Sword</h2>
-          {groupedWeapons["long-sword"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Lance</h2>
-          {groupedWeapons.lance?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Gunlance</h2>
-          {groupedWeapons.gunlance?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Dual Blades</h2>
-          {groupedWeapons["dual-blades"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Switch Axe</h2>
-          {groupedWeapons["switch-axe"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Charge Blade</h2>
-          {groupedWeapons["charge-blade"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Insect Glaive</h2>
-          {groupedWeapons["insect-glaive"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Hunting Horn</h2>
-          {groupedWeapons["hunting-horn"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Bow</h2>
-          {groupedWeapons.bow?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Light Bowgun</h2>
-          {groupedWeapons["light-bowgun"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4 py-4">
-          <h2 className="text-xl font-bold">Heavy Bowgun</h2>
-          {groupedWeapons["heavy-bowgun"]?.map((weapon: WeaponData) => (
-            <li key={weapon.id} className="">
-              {weapon.name}
-            </li>
-          ))}
-        </div>
+        <Accordion type="multiple" defaultValue={[...weaponCategories]}>
+          {weaponCategories.map((category) => {
+            const weapons = groupedWeapons[category];
+            if (!weapons || weapons.length === 0) return null;
+
+            return (
+              <AccordionItem key={category} value={category}>
+                <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+                  <div className="flex items-center gap-3">
+                    <span>{weaponTypeNames[category]}</span>
+                    <span className="text-sm text-muted-foreground font-normal">
+                      ({weapons.length} weapons)
+                    </span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {weapons
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((weapon) => (
+                        <Card key={weapon.id}>
+                          <CardContent className="p-4">
+                            <div className="flex items-start justify-between gap-2 mb-3">
+                              <h3 className="font-semibold text-base leading-tight flex-1">
+                                {weapon.name}
+                              </h3>
+                              <span
+                                className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 bg-muted ${rarityColors[weapon.rarity] || rarityColors[10]}`}
+                              >
+                                R{weapon.rarity}
+                              </span>
+                            </div>
+                            <div className="space-y-1.5">
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-muted-foreground">Attack</span>
+                                <span className="font-semibold">{weapon.damage.display}</span>
+                              </div>
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-muted-foreground">Affinity</span>
+                                <span className={`font-semibold ${weapon.affinity >= 0 ? "text-green-600" : "text-red-500"}`}>
+                                  {weapon.affinity > 0 ? "+" : ""}
+                                  {weapon.affinity}%
+                                </span>
+                              </div>
+                              {weapon.defenseBonus > 0 && (
+                                <div className="flex justify-between items-center text-sm">
+                                  <span className="text-muted-foreground">Defense</span>
+                                  <span className="font-semibold text-blue-600">+{weapon.defenseBonus}</span>
+                                </div>
+                              )}
+                              {weapon.slots && weapon.slots.length > 0 && (
+                                <div className="flex justify-between items-center text-sm">
+                                  <span className="text-muted-foreground">Slots</span>
+                                  <div className="flex gap-1">
+                                    {weapon.slots.map((slot, idx) => (
+                                      <span key={idx} className="w-4 h-4 rounded-full bg-amber-200 border border-amber-400 text-xs flex items-center justify-center">
+                                        {slot}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              {weapon.specials && weapon.specials.length > 0 && (
+                                <div className="pt-2 border-t mt-2">
+                                  {weapon.specials.map((special, idx) => (
+                                    <div key={idx} className="flex justify-between items-center text-sm">
+                                      <span className={`capitalize font-medium ${elementColors[special.element] || "text-gray-600"}`}>
+                                        {special.element}
+                                      </span>
+                                      <span className="text-muted-foreground">{special.damage.display}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            );
+          })}
+        </Accordion>
       </section>
     </div>
   );

@@ -2,23 +2,11 @@
 
 import { ItemData, GroupedItems } from "@/lib/types/items";
 import { groupItemsByCategory } from "@/lib/utils/itemsUtils";
+import { rarityColors } from "@/lib/utils/rarityColors";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo } from "react";
-
-const rarityColors: Record<number, string> = {
-  1: "bg-slate-500/10 text-slate-500 border-slate-500/20",
-  2: "bg-green-500/10 text-green-500 border-green-500/20",
-  3: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-  4: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-  5: "bg-pink-500/10 text-pink-500 border-pink-500/20",
-  6: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-  7: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-  8: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
-  9: "bg-red-500/10 text-red-500 border-red-500/20",
-  10: "bg-rose-500/10 text-rose-500 border-rose-500/20",
-};
 
 interface ItemsListProps {
   items: ItemData[];
