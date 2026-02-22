@@ -109,7 +109,7 @@ export default async function GetAllWeapons() {
                               )}
                               {weapon.slots && weapon.slots.length > 0 && (
                                 <div className="flex justify-between items-center text-sm">
-                                  <span className="text-muted-foreground">Slots</span>
+                                  <span className="text-muted-foreground">Decoration Jewels</span>
                                   <div className="flex gap-1">
                                     {weapon.slots.map((slot, idx) => (
                                       <span key={idx} className="w-4 h-4 rounded-full bg-amber-200 border border-amber-400 text-xs flex items-center justify-center">
