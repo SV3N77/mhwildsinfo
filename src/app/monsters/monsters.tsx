@@ -1,13 +1,20 @@
 "use server";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function GetAllMonsters() {
   const res = await fetch("https://wilds.mhdb.io/en/monsters");
   const data = await res.json();
   // Sort the monsters by name
   const sortedMonsters = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
-  /* TODO: add images when API updates with images*/
+
+  const getMonsterIconPath = (name: string): string => {
+    const normalizedName = name.replace(/ /g, "_");
+    const extension = ["Ceratonoth Female", "Question Mark"].includes(name) ? "png" : "webp";
+    return `/images/monsters/${normalizedName}_Icon.${extension}`;
+  };
+
   return (
     <div className="flex flex-col px-20 py-10">
       <h1 className="text-2xl font-bold pb-4">Monsters List</h1>
@@ -19,7 +26,17 @@ export default async function GetAllMonsters() {
             className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col gap-3"
           >
             <div className="p-4">
-              <h2 className="text-xl font-bold">{monster.name}</h2>
+              <div className="flex items-center gap-4 mb-3">
+                <div className="relative w-16 h-16 flex-shrink-0">
+                  <Image
+                    src={getMonsterIconPath(monster.name)}
+                    alt={monster.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h2 className="text-xl font-bold">{monster.name}</h2>
+              </div>
               <p className="text-muted-foreground">{monster.description}</p>
             </div>
           </Link>
