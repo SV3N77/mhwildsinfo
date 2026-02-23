@@ -52,7 +52,7 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
         item.name.toLowerCase().includes(search.toLowerCase()) ||
         item.rarity.toString().includes(search.toLowerCase()) ||
         item.slot.toString().includes(search.toLowerCase()) ||
-        item.kind.toLowerCase().includes(search.toLowerCase())
+        item.kind.toLowerCase().includes(search.toLowerCase()),
     );
   }, [search, decorations]);
 
@@ -110,33 +110,26 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
               className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("name")}
             >
-              <div className="flex items-center">
-                Name{getSortIndicator("name")}
-              </div>
+              <div className="flex items-center">Name{getSortIndicator("name")}</div>
             </TableHead>
             <TableHead
               className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("rarity")}
             >
-              <div className="flex items-center justify-center">
-                Rarity{getSortIndicator("rarity")}
-              </div>
+              <div className="flex items-center justify-center">Rarity{getSortIndicator("rarity")}</div>
             </TableHead>
             <TableHead
               className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("slot")}
             >
-              <div className="flex items-center justify-center">
-                Slot{getSortIndicator("slot")}
-              </div>
+              <div className="flex items-center justify-center">Slot Level{getSortIndicator("slot")}</div>
             </TableHead>
+            <TableHead className="border px-4 py-2">Skill</TableHead>
             <TableHead
               className="border px-4 py-2 cursor-pointer hover:bg-muted/50"
               onClick={() => requestSort("kind")}
             >
-              <div className="flex items-center">
-                Kind{getSortIndicator("kind")}
-              </div>
+              <div className="flex items-center">Kind{getSortIndicator("kind")}</div>
             </TableHead>
             <TableHead className="border px-4 py-2">Description</TableHead>
           </TableRow>
@@ -146,25 +139,28 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
             Array.from({ length: 5 }).map((_, index) => (
               <TableRow key={index}>
                 <TableCell className="border px-4 py-2 font-medium">
-                  <Skeleton className="h-4 w-[150px]" />
+                  <Skeleton className="h-4 w-37.5" />
                 </TableCell>
                 <TableCell className="border px-4 py-2 text-center">
-                  <Skeleton className="h-4 w-[50px] mx-auto" />
+                  <Skeleton className="h-4 w-12.5 mx-auto" />
                 </TableCell>
                 <TableCell className="border px-4 py-2 text-center">
-                  <Skeleton className="h-4 w-[30px] mx-auto" />
+                  <Skeleton className="h-4 w-7.5 mx-auto" />
                 </TableCell>
                 <TableCell className="border px-4 py-2">
-                  <Skeleton className="h-4 w-[100px]" />
+                  <Skeleton className="h-4 w-25" />
                 </TableCell>
                 <TableCell className="border px-4 py-2">
-                  <Skeleton className="h-4 w-[300px]" />
+                  <Skeleton className="h-4 w-25" />
+                </TableCell>
+                <TableCell className="border px-4 py-2">
+                  <Skeleton className="h-4 w-75" />
                 </TableCell>
               </TableRow>
             ))
           ) : isSearching && !hasResults ? (
             <TableRow className="text-center py-8 text-muted-foreground">
-              <TableCell colSpan={5}>
+              <TableCell colSpan={6}>
                 <div className="col-span-full text-center py-8 text-muted-foreground">
                   No decorations found matching "{search}"
                 </div>
@@ -177,6 +173,11 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
                   <TableCell className="border px-4 py-2 font-medium">{deco.name}</TableCell>
                   <TableCell className="border px-4 py-2 text-center">{deco.rarity}</TableCell>
                   <TableCell className="border px-4 py-2 text-center">{deco.slot}</TableCell>
+                  <TableCell className="border px-4 py-2">
+                    {deco.skills && deco.skills.length > 0
+                      ? deco.skills.map((s) => `${s.skill.name} (${s.level})`).join(", ")
+                      : "-"}
+                  </TableCell>
                   <TableCell className="border px-4 py-2">{deco.kind}</TableCell>
                   <TableCell className="border px-4 py-2">{deco.description}</TableCell>
                 </TableRow>
