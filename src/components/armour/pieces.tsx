@@ -5,28 +5,18 @@ interface PiecesProps {
   pieces: ArmorPiece[];
 }
 
-const pieceIcons: Record<string, string> = {
-  Head: "🪖",
-  Chest: "👕",
-  Arms: "🦾",
-  Waist: "👖",
-  Legs: "👢",
-};
-
 export default function Pieces({ pieces }: PiecesProps) {
   return (
     <div className="space-y-2">
       <div className="text-sm font-semibold text-muted-foreground">Pieces</div>
       <div className="space-y-1">
         {pieces.map((piece: ArmorPiece) => (
-          <div key={piece.id} className="flex items-center justify-between text-sm px-2 py-1 rounded hover:bg-secondary/50 transition-colors">
-            <span className="text-muted-foreground flex items-center gap-2">
-              <span className="w-5 text-center">{pieceIcons[piece.kind] || "•"}</span>
-              {piece.kind}
-            </span>
-            <span className={`font-bold ${rarityColors[piece.rarity] || "text-foreground"}`}>
-              {piece.rarity}★
-            </span>
+          <div
+            key={piece.id}
+            className="flex items-center justify-between text-sm py-1 rounded hover:bg-secondary/50 transition-colors"
+          >
+            <span className="text-muted-foreground flex">{piece.name}</span>
+            <span className={`font-bold ${rarityColors[piece.rarity] || "text-foreground"}`}>{piece.rarity}★</span>
           </div>
         ))}
       </div>
