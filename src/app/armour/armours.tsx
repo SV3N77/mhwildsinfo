@@ -16,7 +16,7 @@ export default async function GetAllArmour() {
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Shield className="h-6 w-6" />
           </div>
-          <h1 className="text-4xl font-bold">Armor Sets</h1>
+          <h1 className="text-4xl font-bold">Armour Sets</h1>
         </div>
         <p className="text-muted-foreground">Browse all armor sets with their defense stats, resistances, and pieces</p>
       </div>

@@ -38,14 +38,14 @@ export default function ClientArmorList({ armourList }: { armourList: ArmorSetDa
     <div className="flex flex-col gap-6">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-        <Input 
-          value={search} 
-          onChange={(e) => setSearch(e.target.value)} 
-          placeholder="Search for an armour set..." 
+        <Input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search for an armour set..."
           className="pl-9 h-11 bg-card/50 border-border/50"
         />
       </div>
-      
+
       {loading ? (
         <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {[...Array(4)].map((_, i) => (
@@ -71,7 +71,7 @@ export default function ClientArmorList({ armourList }: { armourList: ArmorSetDa
           {filteredArmour.map((armour: ArmorSetData) => (
             <Link href={`/armour/${slugify(armour.name)}`} key={armour.id} className="group h-full">
               <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 overflow-hidden border-border/50 flex flex-col">
-                <CardHeader className="pt-5 pb-4 px-5 bg-gradient-to-br from-primary/5 to-transparent">
+                <CardHeader className="pt-5 pb-4 px-5 bg-linear-to-br from-primary/5 to-transparent">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-lg bg-primary/10 text-primary">
                       <Shield className="h-5 w-5" />

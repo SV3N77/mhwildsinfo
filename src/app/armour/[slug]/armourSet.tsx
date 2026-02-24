@@ -26,7 +26,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
       <section className="flex flex-col gap-4">
         <div className="flex flex-row justify-between">
           <div className="flex flex-col gap-2">
-            <h1 className="text-xl font-bold">Armor Pieces</h1>
+            <h1 className="text-xl font-bold">Armour Pieces</h1>
             <div className="flex flex-col gap-2">
               {armourSet.pieces.map((piece) => (
                 <div key={piece.name} className="flex flex-row gap-2">
