@@ -5,7 +5,7 @@ import { ArmorSetData } from "@/lib/types/armour";
 import { Shield } from "lucide-react";
 
 export default async function GetAllArmour() {
-  const res = await fetch("https://wilds.mhdb.io/en/armor/sets", { next: { revalidate: 3600 } });
+  const res = await fetch("https://wilds.mhdb.io/en/armor/sets", { cache: "no-store" });
   const data = (await res.json()) as ArmorSetData[];
   const sortedDataArmour = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 

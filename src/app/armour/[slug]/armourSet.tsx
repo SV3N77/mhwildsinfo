@@ -1,14 +1,23 @@
 "use server";
 
+import { slugify } from "@/lib/utils";
 import Defense from "@/components/armour/defense";
 import Pieces from "@/components/armour/pieces";
 import Resistances from "@/components/armour/resistances";
 import { ArmorSetData } from "@/lib/types/armour";
 import { calculateFullArmorSetCost } from "@/lib/utils/armourUtils";
+import { notFound } from "next/navigation";
 
-export default async function ArmourSet({ id }: { id: string }) {
-  const armourSetData = await fetch(`https://wilds.mhdb.io/en/armor/sets/${id}`, { next: { revalidate: 3600 } });
-  const armourSet = (await armourSetData.json()) as ArmorSetData;
+export default async function ArmourSet({ slug }: { slug: string }) {
+  const allSetsRes = await fetch("https://wilds.mhdb.io/en/armor/sets", { cache: "no-store" });
+  const allSets = (await allSetsRes.json()) as ArmorSetData[];
+
+  const armourSet = allSets.find((set) => slugify(set.name) === slug);
+
+  if (!armourSet) {
+    notFound();
+  }
+
   const totalCost = calculateFullArmorSetCost(armourSet);
 
   return (

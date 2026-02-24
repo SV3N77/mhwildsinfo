@@ -10,6 +10,7 @@ import Pieces from "./pieces";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { slugify } from "@/lib/utils";
 
 export default function ClientArmorList({ armourList }: { armourList: ArmorSetData[] }) {
   const [search, setSearch] = useState("");
@@ -68,7 +69,7 @@ export default function ClientArmorList({ armourList }: { armourList: ArmorSetDa
       ) : (
         <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredArmour.map((armour: ArmorSetData) => (
-            <Link href={`/armour/${armour.id}`} key={armour.id} className="group h-full">
+            <Link href={`/armour/${slugify(armour.name)}`} key={armour.id} className="group h-full">
               <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 overflow-hidden border-border/50 flex flex-col">
                 <CardHeader className="pt-5 pb-4 px-5 bg-gradient-to-br from-primary/5 to-transparent">
                   <div className="flex items-start gap-3">
