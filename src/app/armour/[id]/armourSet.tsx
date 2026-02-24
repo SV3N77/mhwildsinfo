@@ -7,7 +7,7 @@ import { ArmorSetData } from "@/lib/types/armour";
 import { calculateFullArmorSetCost } from "@/lib/utils/armourUtils";
 
 export default async function ArmourSet({ id }: { id: string }) {
-  const armourSetData = await fetch(`https://wilds.mhdb.io/en/armor/sets/${id}`);
+  const armourSetData = await fetch(`https://wilds.mhdb.io/en/armor/sets/${id}`, { next: { revalidate: 3600 } });
   const armourSet = (await armourSetData.json()) as ArmorSetData;
   const totalCost = calculateFullArmorSetCost(armourSet);
 

@@ -40,20 +40,13 @@ function ItemsList({ items }: ItemsListProps) {
   );
 }
 
-export default function GetAllItems() {
-  const [items, setItems] = useState<ItemData[]>([]);
-  const [loading, setLoading] = useState(true);
+interface GetAllItemsProps {
+  items: ItemData[];
+}
+
+export default function GetAllItems({ items }: GetAllItemsProps) {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-
-  useState(() => {
-    fetch("https://wilds.mhdb.io/en/items")
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
-        setLoading(false);
-      });
-  });
 
   const sortedItems = useMemo(() => groupItemsByCategory(items), [items]);
   const categories = Object.keys(sortedItems) as (keyof GroupedItems)[];
@@ -112,22 +105,6 @@ export default function GetAllItems() {
     Material: "Materials",
     Unknown: "Unknown",
   };
-
-  if (loading) {
-    return (
-      <div className="flex flex-col px-20 py-10">
-        <div className="space-y-3">
-          <div className="h-10 w-64 bg-muted rounded animate-pulse" />
-          <div className="h-12 w-96 bg-muted rounded animate-pulse" />
-          <div className="grid grid-cols-4 gap-4 mt-6">
-            {Array.from({ length: 16 }).map((_, i) => (
-              <div key={i} className="h-20 bg-muted rounded animate-pulse" />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col px-20 py-10">

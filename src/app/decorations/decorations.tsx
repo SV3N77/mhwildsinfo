@@ -3,7 +3,7 @@
 import { DecorationsTable } from "@/components/decoration/decorationTable";
 
 export default async function GetAllDecorations() {
-  const res = await fetch("https://wilds.mhdb.io/en/decorations");
+  const res = await fetch("https://wilds.mhdb.io/en/decorations", { next: { revalidate: 3600 } });
   const data = await res.json();
   // Sort the decorations by name
   const sortedDecorations = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));

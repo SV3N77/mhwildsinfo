@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function GetAllMonsters() {
-  const res = await fetch("https://wilds.mhdb.io/en/monsters");
+  const res = await fetch("https://wilds.mhdb.io/en/monsters", { next: { revalidate: 3600 } });
   const data = await res.json();
   // Sort the monsters by name
   const sortedMonsters = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
@@ -28,12 +28,7 @@ export default async function GetAllMonsters() {
             <div className="p-4">
               <div className="flex items-center gap-4 mb-3">
                 <div className="relative w-16 h-16 flex-shrink-0">
-                  <Image
-                    src={getMonsterIconPath(monster.name)}
-                    alt={monster.name}
-                    fill
-                    className="object-contain"
-                  />
+                  <Image src={getMonsterIconPath(monster.name)} alt={monster.name} fill className="object-contain" />
                 </div>
                 <h2 className="text-xl font-bold">{monster.name}</h2>
               </div>
