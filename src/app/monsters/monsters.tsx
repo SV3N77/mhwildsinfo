@@ -27,8 +27,14 @@ export default async function GetAllMonsters() {
           >
             <div className="p-4">
               <div className="flex items-center gap-4 mb-3">
-                <div className="relative w-16 h-16 flex-shrink-0">
-                  <Image src={getMonsterIconPath(monster.name)} alt={monster.name} fill className="object-contain" />
+                <div className="relative w-16 h-16 shrink-0">
+                  <Image
+                    src={getMonsterIconPath(monster.name)}
+                    alt={monster.name}
+                    fill
+                    sizes="64px"
+                    className="object-contain"
+                  />
                 </div>
                 <h2 className="text-xl font-bold">{monster.name}</h2>
               </div>

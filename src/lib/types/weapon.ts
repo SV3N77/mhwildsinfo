@@ -131,7 +131,7 @@ export interface Handicraft {
 // Define the exact category names using 'as const' for strong typing
 export const weaponCategories = [
   "great-sword",
-  "sword-and-shield",
+  "sword-shield",
   "hammer",
   "long-sword",
   "lance",
