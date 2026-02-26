@@ -143,6 +143,7 @@ export interface MonsterPart {
 export interface Monster {
   id: number;
   gameId: number;
+  slug: string;
   kind: MonsterKind;
   species: Species;
   name: string;

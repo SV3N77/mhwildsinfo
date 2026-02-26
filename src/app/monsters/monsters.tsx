@@ -21,7 +21,7 @@ export default async function GetAllMonsters() {
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
         {sortedMonsters.map((monster: any) => (
           <Link
-            href={`/monsters/${monster.id}`}
+            href={`/monsters/${monster.slug}`}
             key={monster.id}
             className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col gap-3"
           >
