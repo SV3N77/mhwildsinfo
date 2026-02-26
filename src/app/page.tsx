@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Shield, Sparkles, Package, Sword, Skull, ChevronRight } from "lucide-react";
+import { Shield, Sparkles, Package, Sword, Skull, ChevronRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const navigationCards = [
@@ -60,12 +60,12 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 container mx-auto px-4 py-12">
         <section className="mb-16 text-center">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-4 bg-linear-to-r from-white to-zinc-400 bg-clip-text text-transparent">
             Monster Hunter Wilds Info
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your comprehensive guide to armour, weapons, items, decorations, and monsters.
-            Everything you need to master the hunt.
+            Your comprehensive guide to armour, weapons, items, decorations, and monsters. Everything you need to master
+            the hunt.
           </p>
         </section>
 
@@ -75,8 +75,10 @@ export default function Home() {
               const Icon = card.icon;
               return (
                 <Link href={card.link} key={card.title} className="group h-full">
-                  <Card className={`h-full transition-all duration-300 hover:-translate-y-1 ${card.borderColor} overflow-hidden border-border/50 flex flex-col`}>
-                    <CardHeader className={`pt-6 pb-4 bg-gradient-to-br ${card.accentColor}`}>
+                  <Card
+                    className={`h-full transition-all duration-300 hover:-translate-y-1 ${card.borderColor} overflow-hidden border-border/50 flex flex-col`}
+                  >
+                    <CardHeader className={`pt-6 pb-4 bg-linear-to-br ${card.accentColor}`}>
                       <div className="flex items-start gap-3">
                         <div className={`p-2 rounded-lg ${card.iconBg} ${card.iconColor}`}>
                           <Icon className="h-5 w-5" />
@@ -90,7 +92,9 @@ export default function Home() {
                       <CardDescription className="text-sm leading-relaxed">{card.description}</CardDescription>
                     </CardContent>
                     <CardFooter className="pt-4 pb-5 border-t border-border/50">
-                      <div className={`flex items-center justify-center text-sm font-medium w-full ${card.iconColor} group-hover:gap-2 gap-1 transition-all`}>
+                      <div
+                        className={`flex items-center justify-center text-sm font-medium w-full ${card.iconColor} group-hover:gap-2 gap-1 transition-all`}
+                      >
                         Explore <ChevronRight className="h-4 w-4" />
                       </div>
                     </CardFooter>
