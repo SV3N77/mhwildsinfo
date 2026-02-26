@@ -1,10 +1,10 @@
 "use server";
 
 import { DecorationsTable } from "@/components/decoration/decorationTable";
+import { getAllDecorations } from "@/lib/actions";
 
 export default async function GetAllDecorations() {
-  const res = await fetch("https://wilds.mhdb.io/en/decorations", { next: { revalidate: 3600 } });
-  const data = await res.json();
+  const data = await getAllDecorations();
   // Sort the decorations by name
   const sortedDecorations = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
   /* TODO: add images when API updates with images*/

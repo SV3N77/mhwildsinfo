@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { getAllMonsters } from "@/lib/actions";
 
 export default async function GetAllMonsters() {
-  const res = await fetch("https://wilds.mhdb.io/en/monsters", { next: { revalidate: 3600 } });
-  const data = await res.json();
+  const data = await getAllMonsters();
   // Sort the monsters by name
   const sortedMonsters = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 

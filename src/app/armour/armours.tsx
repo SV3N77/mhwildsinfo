@@ -3,10 +3,10 @@
 import ClientArmorList from "@/components/armour/clientArmorList";
 import { ArmorSetData } from "@/lib/types/armour";
 import { Shield } from "lucide-react";
+import { getAllArmourSets } from "@/lib/actions";
 
 export default async function GetAllArmour() {
-  const res = await fetch("https://wilds.mhdb.io/en/armor/sets", { cache: "no-store" });
-  const data = (await res.json()) as ArmorSetData[];
+  const data = await getAllArmourSets();
   const sortedDataArmour = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 
   return (

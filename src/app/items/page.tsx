@@ -1,9 +1,9 @@
 import GetAllItems from "./items";
 import { ItemData } from "@/lib/types/items";
+import { getAllItems } from "@/lib/actions";
 
 export default async function ItemsPage() {
-  const res = await fetch("https://wilds.mhdb.io/en/items", { next: { revalidate: 3600 } });
-  const items: ItemData[] = await res.json();
+  const items: ItemData[] = await getAllItems();
 
   return <GetAllItems items={items} />;
 }

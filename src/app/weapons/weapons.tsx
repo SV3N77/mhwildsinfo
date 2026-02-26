@@ -1,11 +1,11 @@
 "use server";
 
 import { weaponCategories, WeaponCategory } from "@/lib/types/weapon";
-import { groupWeaponsByType } from "@/lib/utils/weaponUtils";
 import { rarityColors } from "@/lib/utils/rarityColors";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Swords } from "lucide-react";
+import { getAllWeapons } from "@/lib/actions";
 
 const weaponTypeNames: Record<WeaponCategory, string> = {
   "great-sword": "Great Sword",
@@ -38,9 +38,7 @@ const elementColors: Record<string, string> = {
 };
 
 export default async function GetAllWeapons() {
-  const res = await fetch("https://wilds.mhdb.io/en/weapons");
-  const data = await res.json();
-  const groupedWeapons = groupWeaponsByType(data);
+  const groupedWeapons = await getAllWeapons();
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
