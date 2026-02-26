@@ -1,6 +1,5 @@
 "use server";
 
-import { Monster } from "@/lib/types/monsters";
 import { getMonsterBySlug } from "@/lib/actions/monsters";
 
 export default async function MonsterPage({ slug }: { slug: string }) {
