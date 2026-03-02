@@ -1,7 +1,6 @@
 "use server";
 
 import ClientArmorList from "@/components/armour/clientArmorList";
-import { ArmorSetData } from "@/lib/types/armour";
 import { Shield } from "lucide-react";
 import { getAllArmourSets } from "@/lib/actions";
 

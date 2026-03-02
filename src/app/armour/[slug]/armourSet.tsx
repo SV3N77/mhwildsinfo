@@ -21,7 +21,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
   const totalResistances = calculateTotalResistances(armourSet);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
+    <div className="min-h-screen bg-linear-to-b from-background to-secondary/20">
       <div className="container mx-auto px-6 py-8 max-w-7xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-4">{armourSet.name}</h1>
@@ -37,7 +37,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
           <Card className="border-2 py-3">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-base">
@@ -45,7 +45,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
                 Defense
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="-mt-2">
               <div className="text-3xl font-bold">{totalDefense}</div>
               <p className="text-sm text-muted-foreground mt-1">Base Defense</p>
             </CardContent>
@@ -58,7 +58,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
                 Resistances
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="-mt-2">
               <div className="grid grid-cols-5 gap-2">
                 {[
                   { label: "Fire", value: totalResistances.fire, color: "text-orange-400" },
@@ -87,7 +87,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
                 Crafting Cost
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="-mt-2">
               <div className="text-3xl font-bold">{totalCost.totalZenny.toLocaleString()}</div>
               <p className="text-sm text-muted-foreground mt-1">Zenny</p>
             </CardContent>
@@ -95,7 +95,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
         </div>
 
         {armourSet.groupBonus && (
-          <Card className="mb-8 border-purple-400/30 bg-purple-950/10 py-3">
+          <Card className="mb-5 border-purple-400/30 bg-purple-950/10 py-3">
             <CardHeader className="">
               <CardTitle className="flex items-center gap-2 text-purple-400 text-base">
                 <Layers className="h-4 w-4" />
@@ -203,7 +203,7 @@ export default async function ArmourSet({ slug }: { slug: string }) {
         </Card>
 
         {totalCost.totalMaterials.length > 0 && (
-          <Card className="mt-8 border-2 py-3">
+          <Card className="mt-4 border-2 py-3">
             <CardHeader className="">
               <CardTitle className="flex items-center gap-2 text-base">
                 <Package className="h-4 w-4" />

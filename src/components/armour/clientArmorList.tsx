@@ -71,7 +71,7 @@ export default function ClientArmorList({ armourList }: { armourList: ArmorSetDa
           {filteredArmour.map((armour: ArmorSetData) => (
             <Link href={`/armour/${slugify(armour.name)}`} key={armour.id} className="group h-full">
               <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 overflow-hidden border-border/50 flex flex-col">
-                <CardHeader className="pt-5 pb-4 px-5 bg-linear-to-br from-primary/5 to-transparent">
+                <CardHeader className="pt-5 px-5 bg-linear-to-br from-primary/5 to-transparent">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-lg bg-primary/10 text-primary">
                       <Shield className="h-5 w-5" />
