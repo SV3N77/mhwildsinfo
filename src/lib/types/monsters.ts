@@ -45,7 +45,7 @@ interface EffectResistance extends BaseResistance {
   kind: "effect";
   effect: Effect;
 }
-type MonsterResistance = ElementResistance | StatusResistance | EffectResistance;
+export type MonsterResistance = ElementResistance | StatusResistance | EffectResistance;
 
 interface BaseWeakness {
   id: number;
@@ -65,7 +65,7 @@ interface EffectWeakness extends BaseWeakness {
   kind: "effect";
   effect: Effect;
 }
-type MonsterWeakness = ElementWeakness | StatusWeakness | EffectWeakness;
+export type MonsterWeakness = ElementWeakness | StatusWeakness | EffectWeakness;
 
 export interface MonsterSize {
   base: number;

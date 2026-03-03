@@ -1,13 +1,27 @@
-"use server";
+"use client";
 
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllMonsters } from "@/lib/actions";
+import { Monster } from "@/lib/types/monsters";
+import { Input } from "@/components/ui/input";
 
-export default async function GetAllMonsters() {
-  const data = await getAllMonsters();
-  // Sort the monsters by name
-  const sortedMonsters = data.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
+interface GetAllMonstersProps {
+  data: Monster[];
+}
+
+export default function GetAllMonsters({ data }: GetAllMonstersProps) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredMonsters = useMemo(() => {
+    if (!searchQuery || searchQuery.length < 3) return data;
+    const query = searchQuery.toLowerCase();
+    return data.filter(
+      (monster) => monster.name.toLowerCase().includes(query) || monster.description?.toLowerCase().includes(query),
+    );
+  }, [data, searchQuery]);
+
+  const sortedMonsters = filteredMonsters.sort((a, b) => a.name.localeCompare(b.name));
 
   const getMonsterIconPath = (name: string): string => {
     const normalizedName = name.replace(/ /g, "_");
@@ -18,8 +32,17 @@ export default async function GetAllMonsters() {
   return (
     <div className="flex flex-col px-20 py-10">
       <h1 className="text-2xl font-bold pb-4">Monsters List</h1>
-      <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
-        {sortedMonsters.map((monster: any) => (
+      <div className="mb-6 ">
+        <Input
+          type="text"
+          placeholder="Search monsters by name or description..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full"
+        />
+      </div>
+      <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {sortedMonsters.map((monster) => (
           <Link
             href={`/monsters/${monster.slug}`}
             key={monster.id}
@@ -43,6 +66,9 @@ export default async function GetAllMonsters() {
           </Link>
         ))}
       </section>
+      {sortedMonsters.length === 0 && (
+        <p className="text-center text-muted-foreground py-10">No monsters found matching your search.</p>
+      )}
     </div>
   );
 }

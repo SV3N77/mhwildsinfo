@@ -1,5 +1,7 @@
 import GetAllMonsters from "./monsters";
+import { getAllMonsters } from "@/lib/actions";
 
-export default function MonstersPage() {
-  return <GetAllMonsters />;
+export default async function MonstersPage() {
+  const data = await getAllMonsters();
+  return <GetAllMonsters data={data} />;
 }
