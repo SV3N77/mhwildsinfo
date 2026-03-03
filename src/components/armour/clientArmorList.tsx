@@ -82,11 +82,11 @@ export default function ClientArmorList({ armourList }: { armourList: ArmorSetDa
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4 flex-1">
-                  <Defense armour={armour} />
+                  <Defense armour={armour} variant="list" />
                   <div className="h-px bg-border/50" />
-                  <Resistances armour={armour} />
+                  <Resistances armour={armour} variant="list" />
                   <div className="h-px bg-border/50" />
-                  <Pieces pieces={armour.pieces} />
+                  <Pieces pieces={armour.pieces} variant="list" />
                 </CardContent>
                 <div className="px-6 pb-5 pt-4 mt-auto border-t border-border/50">
                   <div className="flex items-center justify-center text-sm text-primary font-medium group-hover:gap-2 gap-1 transition-all">
