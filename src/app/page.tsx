@@ -79,7 +79,7 @@ export default function Home() {
                     className={`h-full transition-all duration-300 hover:-translate-y-1 ${card.borderColor} overflow-hidden border-border/50 flex flex-col`}
                   >
                     <CardHeader className={`pt-6 pb-4 bg-linear-to-br ${card.accentColor}`}>
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${card.iconBg} ${card.iconColor}`}>
                           <Icon className="h-5 w-5" />
                         </div>
@@ -88,7 +88,7 @@ export default function Home() {
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent className="flex-1 pt-4">
+                    <CardContent className="flex-1 ">
                       <CardDescription className="text-sm leading-relaxed">{card.description}</CardDescription>
                     </CardContent>
                     <CardFooter className="pt-4 pb-5 border-t border-border/50">
