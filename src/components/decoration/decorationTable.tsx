@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Input } from "../ui/input";
 import { Skeleton } from "../ui/skeleton";
 import { DecorationCard } from "./decorationCard";
+import { Swords, Shield } from "lucide-react";
 
 interface DecorationsTableProps {
   decorations: DecorationData[];
@@ -16,6 +17,7 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
     return <div>No decorations data available.</div>;
   }
   const [search, setSearch] = useState("");
+  const [selectedKind, setSelectedKind] = useState<"all" | "weapon" | "armor">("all");
 
   const [loading, setLoading] = useState(false);
   const [sortConfig, setSortConfig] = useState<{
@@ -39,13 +41,19 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
   }, [search]);
 
   const filteredDecorations = useMemo(() => {
+    let filtered = decorations;
+
+    if (selectedKind !== "all") {
+      filtered = filtered.filter((item) => item.kind === selectedKind);
+    }
+
     if (search === "") {
-      return decorations;
+      return filtered;
     }
     if (search.length < 3) {
-      return decorations;
+      return filtered;
     }
-    return decorations.filter(
+    return filtered.filter(
       (item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) ||
         item.rarity.toString().includes(search.toLowerCase()) ||
@@ -53,7 +61,7 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
         item.kind.toLowerCase().includes(search.toLowerCase()) ||
         (item.skills?.some((skill) => skill.skill.name.toLowerCase().includes(search.toLowerCase())) ?? false)
     );
-  }, [search, decorations]);
+  }, [search, decorations, selectedKind]);
 
   const sortedDecorations = useMemo(() => {
     let sortableItems = [...filteredDecorations];
@@ -87,7 +95,51 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search decorations by name, skill, rarity, slot..." />
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex gap-2 rounded-lg bg-muted p-1">
+          <button
+            onClick={() => setSelectedKind("all")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              selectedKind === "all"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            }`}
+          >
+            <span>All</span>
+            <span className="text-xs text-muted-foreground">({decorations.length})</span>
+          </button>
+          <button
+            onClick={() => setSelectedKind("weapon")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              selectedKind === "weapon"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            }`}
+          >
+            <Swords className="h-4 w-4" />
+            <span>Weapon</span>
+            <span className="text-xs text-muted-foreground">({decorations.filter((d) => d.kind === "weapon").length})</span>
+          </button>
+          <button
+            onClick={() => setSelectedKind("armor")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              selectedKind === "armor"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            }`}
+          >
+            <Shield className="h-4 w-4" />
+            <span>Armor</span>
+            <span className="text-xs text-muted-foreground">({decorations.filter((d) => d.kind === "armor").length})</span>
+          </button>
+        </div>
+        <Input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by name, skill, rarity, slot..."
+          className="flex-1"
+        />
+      </div>
       
       {loading ? (
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -106,7 +158,12 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
       ) : isSearching && !hasResults ? (
         <div className="text-center py-16 text-muted-foreground">
           <p className="text-lg">No decorations found matching "{search}"</p>
-          <p className="text-sm mt-2">Try adjusting your search terms</p>
+          <p className="text-sm mt-2">Try adjusting your search terms or filter</p>
+        </div>
+      ) : sortedDecorations.length === 0 ? (
+        <div className="text-center py-16 text-muted-foreground">
+          <p className="text-lg">No decorations found</p>
+          <p className="text-sm mt-2">Try selecting a different filter category</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

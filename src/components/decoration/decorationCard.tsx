@@ -4,6 +4,7 @@ import { DecorationData } from "@/lib/types/decoration";
 import { Card, CardContent } from "@/components/ui/card";
 import { rarityColors } from "@/lib/utils/rarityColors";
 import { Badge } from "@/components/ui/badge";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 interface DecorationCardProps {
   decoration: DecorationData;
@@ -17,7 +18,7 @@ export function DecorationCard({ decoration }: DecorationCardProps) {
           <div className="flex-1">
             <h3 className="font-semibold text-base leading-tight mb-1">{decoration.name}</h3>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>{decoration.kind}</span>
+              <span>{capitalizeFirstLetter(decoration.kind)}</span>
               <span>•</span>
               <span className="flex items-center gap-1">
                 <span className="relative inline-block w-3 h-3">
