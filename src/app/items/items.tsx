@@ -3,40 +3,48 @@
 import { ItemData, GroupedItems } from "@/lib/types/items";
 import { groupItemsByCategory } from "@/lib/utils/itemsUtils";
 import { rarityColors } from "@/lib/utils/rarityColors";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo } from "react";
+import { Package, Droplet, Wrench, Zap, Gem, Flame, Utensils, Shield, HelpCircle } from "lucide-react";
 
-interface ItemsListProps {
-  items: ItemData[];
+interface ItemCardProps {
+  item: ItemData;
 }
 
-function ItemsList({ items }: ItemsListProps) {
+function ItemCard({ item }: ItemCardProps) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-      {items.map((item) => (
-        <div
-          key={item.id}
-          className="flex items-center gap-3 p-3 rounded-lg bg-card border border-border hover:bg-accent/50 transition-colors cursor-default"
-        >
-          <div className="flex-1 min-w-0">
-            <div className="font-medium text-sm truncate">{item.name}</div>
-            {item.description && (
-              <div className="text-xs text-muted-foreground truncate mt-0.5">{item.description}</div>
-            )}
-          </div>
-          {item.rarity && (
-            <Badge
-              variant="outline"
-              className={`shrink-0 text-xs ${rarityColors[item.rarity] || rarityColors[10]}`}
-            >
-              {item.rarity}
-            </Badge>
+    <Card>
+      <CardContent className="p-4">
+        <div className="flex items-start justify-between gap-2 mb-3">
+          <h3 className="font-semibold text-base leading-tight flex-1">{item.name}</h3>
+          <Badge
+            variant="secondary"
+            className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 bg-muted ${rarityColors[item.rarity] || rarityColors[10]}`}
+          >
+            R{item.rarity}
+          </Badge>
+        </div>
+
+        <div className="space-y-2 mb-3">
+          {item.value > 0 && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-muted-foreground">Value</span>
+              <span className="font-semibold">z{item.value.toLocaleString()}</span>
+            </div>
+          )}
+          {item.carryLimit > 0 && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-muted-foreground">Carry Limit</span>
+              <span className="font-semibold">{item.carryLimit}</span>
+            </div>
           )}
         </div>
-      ))}
-    </div>
+
+        <p className="text-sm text-muted-foreground line-clamp-3">{item.description}</p>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -49,7 +57,9 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const sortedItems = useMemo(() => groupItemsByCategory(items), [items]);
-  const categories = Object.keys(sortedItems) as (keyof GroupedItems)[];
+  const categories = (Object.keys(sortedItems) as Array<keyof GroupedItems>).filter(
+    (cat) => sortedItems[cat] && sortedItems[cat]!.length > 0
+  );
 
   const filteredItems = useMemo(() => {
     if (search === "" && selectedCategory === "all") {
@@ -64,7 +74,7 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
       }
 
       const categoryItems = sortedItems[category];
-      if (!categoryItems) return;
+      if (!categoryItems || categoryItems.length === 0) return;
 
       if (search === "") {
         result[category] = categoryItems;
@@ -80,18 +90,18 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
     });
 
     return result;
-  }, [sortedItems, search, selectedCategory]);
+  }, [sortedItems, search, selectedCategory, categories]);
 
-  const categoryColors: Record<string, string> = {
-    Ammo: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-    TrapsSlinger: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-    Tool: "bg-green-500/10 text-green-500 border-green-500/20",
-    Consumable: "bg-red-500/10 text-red-500 border-red-500/20",
-    Ingredient: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
-    CookingIngredients: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-    SpecialItem: "bg-pink-500/10 text-pink-500 border-pink-500/20",
-    Material: "bg-gray-500/10 text-gray-500 border-gray-500/20",
-    Unknown: "bg-slate-500/10 text-slate-500 border-slate-500/20",
+  const categoryIcons: Record<string, React.ReactNode> = {
+    Ammo: <Zap className="h-4 w-4" />,
+    TrapsSlinger: <Shield className="h-4 w-4" />,
+    Tool: <Wrench className="h-4 w-4" />,
+    Consumable: <Droplet className="h-4 w-4" />,
+    Ingredient: <Flame className="h-4 w-4" />,
+    CookingIngredients: <Utensils className="h-4 w-4" />,
+    SpecialItem: <Gem className="h-4 w-4" />,
+    Material: <Package className="h-4 w-4" />,
+    Unknown: <HelpCircle className="h-4 w-4" />,
   };
 
   const categoryNames: Record<string, string> = {
@@ -107,64 +117,86 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
   };
 
   return (
-    <div className="flex flex-col px-20 py-10">
+    <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Items</h1>
-        <p className="text-muted-foreground">Browse all items available in Monster Hunter Wilds</p>
+        <div className="flex items-center gap-3 mb-2">
+          <div className="p-2 rounded-lg bg-primary/10 text-primary">
+            <Package className="h-6 w-6" />
+          </div>
+          <h1 className="text-4xl font-bold">Items</h1>
+        </div>
+        <p className="text-muted-foreground">
+          Browse all items available in Monster Hunter Wilds
+        </p>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      <div className="flex flex-col gap-3 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 rounded-lg bg-muted p-2">
+          <button
+            onClick={() => setSelectedCategory("all")}
+            className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              selectedCategory === "all"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            }`}
+          >
+            <span>All</span>
+            <span className="text-xs text-muted-foreground">({items.length})</span>
+          </button>
+          {categories.map((category) => {
+            const categoryItems = sortedItems[category];
+            return (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  selectedCategory === category
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                }`}
+              >
+                {categoryIcons[category]}
+                <span className="truncate">{categoryNames[category] || category}</span>
+                <span className="text-xs text-muted-foreground shrink-0">({categoryItems?.length || 0})</span>
+              </button>
+            );
+          })}
+        </div>
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search items..."
-          className="max-w-md"
+          placeholder="Search items by name, description..."
         />
-        <div className="flex flex-wrap gap-2">
-          <Badge
-            variant={selectedCategory === "all" ? "default" : "outline"}
-            className="cursor-pointer hover:bg-accent"
-            onClick={() => setSelectedCategory("all")}
-          >
-            All Categories
-          </Badge>
-          {categories.map((category) => (
-            <Badge
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              className={`cursor-pointer hover:bg-accent ${
-                selectedCategory === category ? "" : categoryColors[category] || ""
-              }`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {categoryNames[category] || category}
-            </Badge>
-          ))}
-        </div>
       </div>
 
-      <div className="space-y-8">
-        {Object.entries(filteredItems).map(([category, items]) => {
-          if (!items || items.length === 0) return null;
+      <div className="space-y-6">
+        {Object.entries(filteredItems).map(([category, categoryItems]) => {
+          if (!categoryItems || categoryItems.length === 0) return null;
           return (
-            <Card key={category} className="overflow-hidden">
-              <CardHeader className="bg-muted/50 py-6">
-                <div className="flex items-center gap-3">
-                  <CardTitle className="text-2xl">{categoryNames[category] || category}</CardTitle>
-                  <Badge variant="secondary" className="text-sm">
-                    {items.length} items
-                  </Badge>
+            <div key={category}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-muted">
+                  {categoryIcons[category]}
                 </div>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <ItemsList items={items} />
-              </CardContent>
-            </Card>
+                <div>
+                  <h2 className="text-xl font-semibold">{categoryNames[category] || category}</h2>
+                  <p className="text-sm text-muted-foreground">{categoryItems.length} items</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {categoryItems
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((item) => (
+                    <ItemCard key={item.id} item={item} />
+                  ))}
+              </div>
+            </div>
           );
         })}
         {Object.keys(filteredItems).length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
-            No items found matching "{search}"
+          <div className="text-center py-16 text-muted-foreground">
+            <p className="text-lg">No items found matching "{search}"</p>
+            <p className="text-sm mt-2">Try adjusting your search terms or filter</p>
           </div>
         )}
       </div>
