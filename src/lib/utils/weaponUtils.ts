@@ -17,3 +17,13 @@ export function groupWeaponsByType(weapons: WeaponData[]): GroupedWeapons {
 
   return grouped;
 }
+
+export function createWeaponSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-|-$/g, "");
+}

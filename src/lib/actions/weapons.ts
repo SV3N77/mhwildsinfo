@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { weaponCategories, type WeaponCategory, type WeaponData, type GroupedWeapons } from "@/lib/types/weapon";
+import { createWeaponSlug } from "@/lib/utils/weaponUtils";
 
 const fetchWeaponsByType = unstable_cache(
   async (type: WeaponCategory): Promise<WeaponData[]> => {
@@ -69,4 +70,17 @@ const fetchWeaponsIndex = unstable_cache(
 
 export async function getWeaponsIndex(): Promise<WeaponIndex[]> {
   return fetchWeaponsIndex();
+}
+
+export async function getWeaponBySlug(slug: string): Promise<WeaponData | null> {
+  const allWeapons = await getAllWeapons();
+  for (const category of weaponCategories) {
+    const weapons = allWeapons[category];
+    if (!weapons) continue;
+
+    const weapon = weapons.find((w) => createWeaponSlug(w.name) === slug);
+    if (weapon) return weapon;
+  }
+
+  return null;
 }
