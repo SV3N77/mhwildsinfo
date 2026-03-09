@@ -106,6 +106,8 @@ export interface WeaponData {
   skills: WeaponSkillInfo[];
   crafting: CraftingInfo;
   series: WeaponSeriesInfo;
+  sharpness: Sharpness | null;
+  handicraft: number[] | null;
 }
 
 export interface Sharpness {

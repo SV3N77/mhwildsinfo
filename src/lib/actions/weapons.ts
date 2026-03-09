@@ -79,7 +79,18 @@ export async function getWeaponBySlug(slug: string): Promise<WeaponData | null> 
     if (!weapons) continue;
 
     const weapon = weapons.find((w) => createWeaponSlug(w.name) === slug);
-    if (weapon) return weapon;
+    if (weapon) {
+      const response = await fetch(`https://wilds.mhdb.io/en/weapons/${weapon.id}`, {
+        next: { revalidate: 3600, tags: ["weapons", `weapon-${weapon.id}`] },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch weapon details: ${response.statusText}`);
+      }
+
+      const weaponDetails: WeaponData = await response.json();
+      return weaponDetails;
+    }
   }
 
   return null;

@@ -3,6 +3,7 @@ import { rarityColors } from "@/lib/utils/rarityColors";
 import { elementColors, weaponIcons } from "../weapons";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Zap, Flame, Droplets, Snowflake, Wind, Ghost, Star, Crown } from "lucide-react";
+import SharpnessBar from "@/components/sharpnessBar";
 
 interface WeaponPageProps {
   weapon: WeaponData | null;
@@ -73,6 +74,12 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
                   <p className="text-lg font-semibold capitalize">{weapon.kind.replace(/-/g, " ")}</p>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="py-6">
+              <SharpnessBar sharpness={weapon.sharpness} handicraft={weapon.handicraft || undefined} />
             </CardContent>
           </Card>
 

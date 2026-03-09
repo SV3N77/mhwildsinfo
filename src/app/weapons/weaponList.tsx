@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { createWeaponSlug } from "@/lib/utils/weaponUtils";
+import { SharpnessBarVisual } from "@/components/sharpnessBar";
 
 interface WeaponListProps {
   groupedWeapons: GroupedWeapons;
@@ -139,6 +140,11 @@ export default function WeaponList({
                                       <span className="text-muted-foreground">{special.damage.display}</span>
                                     </div>
                                   ))}
+                                </div>
+                              )}
+                              {weapon.sharpness && (
+                                <div className="pt-2 border-t mt-2">
+                                  <SharpnessBarVisual sharpness={weapon.sharpness} />
                                 </div>
                               )}
                             </div>
