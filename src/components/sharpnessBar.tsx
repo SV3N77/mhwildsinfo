@@ -30,7 +30,7 @@ export function SharpnessBarVisual({ sharpness }: { sharpness: Sharpness }) {
 
   return (
     <>
-      <div className="h-4 rounded-sm overflow-hidden flex bg-gray-300 border border-gray-400">
+      <div className="h-4 overflow-hidden flex">
         {segments.map((segment, idx) => {
           const percentage = segment.value > 0 ? (segment.value / totalHits) * 100 : 0;
           if (percentage === 0) return null;

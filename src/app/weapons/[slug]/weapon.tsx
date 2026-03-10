@@ -76,13 +76,13 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
               </div>
             </CardContent>
           </Card>
-
-          <Card>
-            <CardContent className="py-6">
-              <SharpnessBar sharpness={weapon.sharpness} handicraft={weapon.handicraft || undefined} />
-            </CardContent>
-          </Card>
-
+          {weapon.sharpness && (
+            <Card>
+              <CardContent className="py-6">
+                <SharpnessBar sharpness={weapon.sharpness} handicraft={weapon.handicraft || undefined} />
+              </CardContent>
+            </Card>
+          )}
           {weapon.specials && weapon.specials.length > 0 && (
             <Card className="py-3">
               <CardHeader>
