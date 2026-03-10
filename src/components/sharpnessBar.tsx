@@ -1,4 +1,5 @@
 import { Sharpness } from "@/lib/types/weapon";
+import { getSharpnessSegments, getTotalHits } from "@/lib/utils/weaponUtils";
 
 interface SharpnessBarProps {
   sharpness: Sharpness | null;
@@ -6,55 +7,24 @@ interface SharpnessBarProps {
 }
 
 export function SharpnessBarVisual({ sharpness }: { sharpness: Sharpness }) {
-  const segments = [
-    { value: sharpness.red, color: "bg-red-500" },
-    { value: sharpness.orange, color: "bg-orange-500" },
-    { value: sharpness.yellow, color: "bg-yellow-500" },
-    { value: sharpness.green, color: "bg-green-500" },
-    { value: sharpness.blue, color: "bg-blue-500" },
-    { value: sharpness.white, color: "bg-white" },
-    { value: sharpness.purple, color: "bg-purple-500" },
-  ];
-
-  const totalHits = segments.reduce((sum, seg) => sum + (seg.value || 0), 0);
-
-  const hasSharpness = segments.some((seg) => seg.value && seg.value > 0);
-
-  if (!hasSharpness) {
-    return (
-      <div className="h-4 rounded-sm bg-gray-300 flex items-center justify-center border border-gray-400">
-        <span className="text-xs text-gray-600">No sharpness data</span>
-      </div>
-    );
-  }
+  const segments = getSharpnessSegments(sharpness);
+  const totalHits = getTotalHits(sharpness);
 
   return (
-    <>
-      <div className="h-4 overflow-hidden flex">
-        {segments.map((segment, idx) => {
-          const percentage = segment.value > 0 ? (segment.value / totalHits) * 100 : 0;
-          if (percentage === 0) return null;
-          return <div key={idx} className={`h-full ${segment.color}`} style={{ width: `${percentage}%` }} />;
-        })}
-      </div>
-    </>
+    <div className="h-4  overflow-hidden flex ">
+      {segments.map((segment, idx) => {
+        const percentage = segment.value > 0 ? (segment.value / totalHits) * 100 : 0;
+        if (percentage === 0) return null;
+        return <div key={idx} className={`h-full ${segment.color}`} style={{ width: `${percentage}%` }} />;
+      })}
+    </div>
   );
 }
 
 export default function SharpnessBar({ sharpness, handicraft }: SharpnessBarProps) {
   if (!sharpness) return null;
 
-  const segments = [
-    { value: sharpness.red, color: "bg-red-500" },
-    { value: sharpness.orange, color: "bg-orange-500" },
-    { value: sharpness.yellow, color: "bg-yellow-500" },
-    { value: sharpness.green, color: "bg-green-500" },
-    { value: sharpness.blue, color: "bg-blue-500" },
-    { value: sharpness.white, color: "bg-white" },
-    { value: sharpness.purple, color: "bg-purple-500" },
-  ];
-
-  const totalHits = segments.reduce((sum, seg) => sum + (seg.value || 0), 0);
+  const totalHits = getTotalHits(sharpness);
 
   return (
     <div className="space-y-4">
@@ -65,7 +35,7 @@ export default function SharpnessBar({ sharpness, handicraft }: SharpnessBarProp
         </div>
         <SharpnessBarVisual sharpness={sharpness} />
         <div className="flex gap-3 mt-2">
-          {segments
+          {getSharpnessSegments(sharpness)
             .filter((seg) => seg.value > 0)
             .map((segment, idx) => (
               <div key={idx} className="flex items-center gap-1.5 text-xs">
