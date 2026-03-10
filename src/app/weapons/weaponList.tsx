@@ -70,86 +70,88 @@ export default function WeaponList({
 
           return (
             <AccordionItem key={category} value={category}>
-              <AccordionTrigger className="text-lg font-semibold hover:no-underline">
+              <AccordionTrigger className="text-lg font-semibold hover:no-underline border border-border bg-card px-6 py-4 rounded-lg shadow-sm hover:shadow-md hover:bg-accent/50 transition-all">
                 <div className="flex items-center gap-3">
                   <img src={weaponIcons[category]} alt={weaponTypeNames[category]} className="w-8 h-8" />
                   <span>{weaponTypeNames[category]}</span>
                   <span className="text-sm text-muted-foreground font-normal">({weapons.length} weapons)</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent>
-                <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <AccordionContent className="pt-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {weapons
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((weapon) => (
                       <Link href={`/weapons/${createWeaponSlug(weapon.name)}`} key={weapon.id}>
-                        <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
-                          <CardContent className="p-4">
-                            <div className="flex items-start justify-between gap-2 mb-3">
-                              <h3 className="font-semibold text-base leading-tight flex-1">{weapon.name}</h3>
+                        <div className="group relative overflow-hidden rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-lg hover:border-primary/30">
+                          <div className="mb-4">
+                            <div className="flex items-start justify-between gap-2">
+                              <h3 className="font-semibold text-lg leading-tight flex-1 group-hover:text-primary transition-colors">{weapon.name}</h3>
                               <span
-                                className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 bg-muted ${rarityColors[weapon.rarity] || rarityColors[10]}`}
+                                className={`px-2.5 py-1 rounded-full text-xs font-bold shrink-0 ${rarityColors[weapon.rarity] || rarityColors[10]}`}
                               >
                                 R{weapon.rarity}
                               </span>
                             </div>
-                            <div className="space-y-1.5">
-                              <div className="flex justify-between items-center text-sm">
-                                <span className="text-muted-foreground">Attack</span>
-                                <span className="font-semibold">{weapon.damage.display}</span>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">Attack</p>
+                              <p className="font-bold text-base">{weapon.damage.display}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-muted-foreground mb-1">Affinity</p>
+                              <p className={`font-bold text-base ${weapon.affinity >= 0 ? "text-green-600" : "text-red-500"}`}>
+                                {weapon.affinity > 0 ? "+" : ""}
+                                {weapon.affinity}%
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 pt-4 border-t space-y-2">
+                            {weapon.sharpness && (
+                              <div className="mb-3">
+                                <p className="text-xs text-muted-foreground mb-2">Sharpness</p>
+                                <SharpnessBarVisual sharpness={weapon.sharpness} />
                               </div>
-                              <div className="flex justify-between items-center text-sm">
-                                <span className="text-muted-foreground">Affinity</span>
-                                <span
-                                  className={`font-semibold ${weapon.affinity >= 0 ? "text-green-600" : "text-red-500"}`}
-                                >
-                                  {weapon.affinity > 0 ? "+" : ""}
-                                  {weapon.affinity}%
-                                </span>
-                              </div>
-                              {weapon.defenseBonus > 0 && (
-                                <div className="flex justify-between items-center text-sm">
-                                  <span className="text-muted-foreground">Defense</span>
-                                  <span className="font-semibold text-blue-600">+{weapon.defenseBonus}</span>
+                            )}
+
+                            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
+                              {weapon.specials && weapon.specials.length > 0 && (
+                                <div className="flex items-center gap-1.5">
+                                  <span className={`font-medium ${elementColors[weapon.specials[0].element] || "text-gray-600"}`}>
+                                    {weapon.specials[0].element}
+                                  </span>
+                                  <span className="text-muted-foreground">{weapon.specials[0].damage.display}</span>
                                 </div>
                               )}
+
+                              {weapon.defenseBonus > 0 && (
+                                <div className="flex items-center gap-1.5">
+                                  <span className="font-medium text-blue-600">Defense</span>
+                                  <span className="text-muted-foreground">+{weapon.defenseBonus}</span>
+                                </div>
+                              )}
+
                               {weapon.slots && weapon.slots.length > 0 && (
-                                <div className="flex justify-between items-center text-sm">
-                                  <span className="text-muted-foreground">Decoration Jewels</span>
-                                  <div className="flex gap-1">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="font-medium text-muted-foreground">Slots</span>
+                                  <div className="flex gap-0.5">
                                     {weapon.slots.map((slot, idx) => (
-                                      <span
+                                      <div
                                         key={idx}
-                                        className="relative w-4 h-4 bg-blue-700 border border-blue-900 text-xs flex items-center justify-center rotate-45"
+                                        className="w-4 h-4 rounded-full bg-blue-700 border border-blue-900 text-white text-xs flex items-center justify-center"
                                       >
-                                        <span className="absolute -rotate-45">{slot}</span>
-                                      </span>
+                                        {slot}
+                                      </div>
                                     ))}
                                   </div>
                                 </div>
                               )}
-                              {weapon.specials && weapon.specials.length > 0 && (
-                                <div className="pt-2 border-t mt-2">
-                                  {weapon.specials.map((special, idx) => (
-                                    <div key={idx} className="flex justify-between items-center text-sm">
-                                      <span
-                                        className={`capitalize font-medium ${elementColors[special.element] || "text-gray-600"}`}
-                                      >
-                                        {special.element}
-                                      </span>
-                                      <span className="text-muted-foreground">{special.damage.display}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-                              {weapon.sharpness && (
-                                <div className="pt-2 border-t mt-2">
-                                  <SharpnessBarVisual sharpness={weapon.sharpness} />
-                                </div>
-                              )}
                             </div>
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </div>
                       </Link>
                     ))}
                 </div>
