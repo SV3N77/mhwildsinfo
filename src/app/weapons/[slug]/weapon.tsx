@@ -2,8 +2,10 @@ import { WeaponData } from "@/lib/types/weapon";
 import { rarityColors } from "@/lib/utils/rarityColors";
 import { elementColors, weaponIcons } from "../weapons";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Zap, Flame, Droplets, Snowflake, Wind, Ghost, Star, Crown } from "lucide-react";
+import { Zap, Flame, Droplets, Snowflake, Wind, Ghost, Star, Crown, ArrowRight, ArrowLeft } from "lucide-react";
 import SharpnessBar from "@/components/sharpnessBar";
+import { createWeaponSlug } from "@/lib/utils/weaponUtils";
+import Link from "next/link";
 
 interface WeaponPageProps {
   weapon: WeaponData | null;
@@ -205,19 +207,31 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
             </CardHeader>
             <CardContent>
               {weapon.crafting.previous && (
-                <div className="mb-6 pb-6 border-b">
+                <div className="pb-4 border-b">
                   <p className="text-sm text-muted-foreground mb-2">Previous Weapon</p>
-                  <p className="font-medium">{weapon.crafting.previous.name}</p>
+
+                  <Link
+                    href={`/weapons/${createWeaponSlug(weapon.crafting.previous.name)}`}
+                    className="font-medium text-primary hover:underline flex items-center gap-2"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    {weapon.crafting.previous.name}
+                  </Link>
                 </div>
               )}
               {weapon.crafting.branches.length > 0 && (
                 <div>
-                  <p className="text-sm text-muted-foreground mb-3">Branches To</p>
+                  <p className="text-sm text-muted-foreground mb-3 pt-4">Branches To</p>
                   <div className="space-y-2">
                     {weapon.crafting.branches.map((branch, idx) => (
-                      <p key={idx} className="font-medium py-1">
+                      <Link
+                        key={idx}
+                        href={`/weapons/${createWeaponSlug(branch.name)}`}
+                        className="font-medium text-primary hover:underline flex items-center gap-2 py-1"
+                      >
                         {branch.name}
-                      </p>
+                        <ArrowRight className="w-4 h-4 shrink-0" />
+                      </Link>
                     ))}
                   </div>
                 </div>
