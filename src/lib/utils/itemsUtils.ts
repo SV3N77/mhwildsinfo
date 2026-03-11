@@ -275,6 +275,11 @@ export function categorizeItem(item: ItemData): ItemCategory {
     return "CookingIngredients";
   }
 
+  // --- Tickets and Catalogs (Special Items) ---
+  if (name.includes("ticket") || name.includes("catalog")) {
+    return "SpecialItem";
+  }
+
   // --- Fallback ---
   // console.warn(`Rule-based fallback for item: ${item.name} (ID: ${item.id}) - categorizing as Unknown.`);
   return "Unknown";
