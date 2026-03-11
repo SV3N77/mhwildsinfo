@@ -126,58 +126,59 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
             </Card>
           )}
 
-          {weapon.crafting.craftable &&
-            (weapon.crafting.craftingMaterials.length > 0 || weapon.crafting.upgradeMaterials.length > 0) && (
-              <Card className="py-3">
-                <CardHeader>
-                  <CardTitle>Crafting Materials & Costs</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {weapon.crafting.craftingMaterials.length > 0 && (
-                    <div className="mb-6">
-                      <p className="text-sm text-muted-foreground mb-3">Craft (From Scratch)</p>
-                      <div className="space-y-3">
-                        {weapon.crafting.craftingMaterials.map((material, idx) => (
-                          <div key={idx} className="flex justify-between items-center py-2">
-                            <span className="flex-1">{material.item.name}</span>
-                            <span className="font-semibold">x{material.quantity}</span>
-                          </div>
-                        ))}
+          <Card className="py-3">
+            <CardHeader>
+              <CardTitle>Crafting Materials & Costs</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {weapon.crafting.craftingMaterials && weapon.crafting.craftingMaterials.length > 0 && (
+                <div className="mb-6">
+                  <p className="text-sm text-muted-foreground mb-3">Craft (From Scratch)</p>
+                  <div className="space-y-3">
+                    {weapon.crafting.craftingMaterials.map((material, idx) => (
+                      <div key={idx} className="flex justify-between items-center py-2">
+                        <span className="flex-1">{material.item.name}</span>
+                        <span className="font-semibold">x{material.quantity}</span>
                       </div>
-                      {weapon.crafting.craftingZennyCost && (
-                        <div className="mt-4 pt-4 border-t">
-                          <div className="flex justify-between items-center">
-                            <span className="text-muted-foreground">Zenny Cost</span>
-                            <span className="font-semibold text-lg">{weapon.crafting.craftingZennyCost}z</span>
-                          </div>
-                        </div>
-                      )}
+                    ))}
+                  </div>
+                  {weapon.crafting.craftingZennyCost && (
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Zenny Cost</span>
+                        <span className="font-semibold text-lg">{weapon.crafting.craftingZennyCost}z</span>
+                      </div>
                     </div>
                   )}
-                  {weapon.crafting.upgradeMaterials.length > 0 && weapon.crafting.previous && (
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-3">Upgrade (From Previous)</p>
-                      <div className="space-y-3">
-                        {weapon.crafting.upgradeMaterials.map((material, idx) => (
-                          <div key={idx} className="flex justify-between items-center py-2">
-                            <span className="flex-1">{material.item.name}</span>
-                            <span className="font-semibold">x{material.quantity}</span>
-                          </div>
-                        ))}
+                </div>
+              )}
+              {weapon.crafting.upgradeMaterials && weapon.crafting.upgradeMaterials.length > 0 && (
+                <div>
+                  <p className="text-sm text-muted-foreground mb-3">Upgrade (From Previous)</p>
+                  <div className="space-y-3">
+                    {weapon.crafting.upgradeMaterials.map((material, idx) => (
+                      <div key={idx} className="flex justify-between items-center py-2">
+                        <span className="flex-1">{material.item.name}</span>
+                        <span className="font-semibold">x{material.quantity}</span>
                       </div>
-                      {weapon.crafting.upgradeZennyCost && (
-                        <div className="mt-4 pt-4 border-t">
-                          <div className="flex justify-between items-center">
-                            <span className="text-muted-foreground">Zenny Cost</span>
-                            <span className="font-semibold text-lg">{weapon.crafting.upgradeZennyCost}z</span>
-                          </div>
-                        </div>
-                      )}
+                    ))}
+                  </div>
+                  {weapon.crafting.upgradeZennyCost && (
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Zenny Cost</span>
+                        <span className="font-semibold text-lg">{weapon.crafting.upgradeZennyCost}z</span>
+                      </div>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-            )}
+                </div>
+              )}
+              {(!weapon.crafting.craftingMaterials || weapon.crafting.craftingMaterials.length === 0) &&
+               (!weapon.crafting.upgradeMaterials || weapon.crafting.upgradeMaterials.length === 0) && (
+                <p className="text-muted-foreground py-4">No crafting materials available</p>
+              )}
+            </CardContent>
+          </Card>
         </div>
 
         <div className="space-y-6">
