@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { getArmourSetBySlug } from "@/lib/actions";
 import Defense from "@/components/armour/defense";
 import Resistances from "@/components/armour/resistances";
-import CraftingCostCard from "@/components/armour/craftingCostCard";
 import SetBonusCard from "@/components/armour/setBonusCard";
 import Pieces from "@/components/armour/pieces";
 import TotalMaterialsCard from "@/components/armour/totalMaterialsCard";
@@ -37,10 +36,9 @@ export default async function ArmourSet({ slug }: { slug: string }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4">
           <Defense armour={armourSet} variant="card" />
           <Resistances armour={armourSet} variant="card" />
-          <CraftingCostCard totalCost={totalCost} />
         </div>
 
         <SetBonusCard armourSet={armourSet} />
