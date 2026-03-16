@@ -194,6 +194,10 @@ export function categorizeItem(item: ItemData): ItemCategory {
     name.includes("ridge") ||
     name.includes("krano") ||
     name.includes("pleura") ||
+    name.includes("omega") ||
+    name.includes("seregios") ||
+    name.includes("lagiacrus") ||
+    name.includes("gogmazios") ||
     name === "firestone" ||
     name === "firecell stone" ||
     name === "dalthydon wool" ||
