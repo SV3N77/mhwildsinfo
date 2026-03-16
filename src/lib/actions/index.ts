@@ -4,3 +4,4 @@ export * from "./weapons";
 export * from "./monsters";
 export * from "./items";
 export * from "./decorations";
+export * from "./talismans";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Sparkles, Package, Sword, Skull, ChevronRight } from "lucide-react";
+import { Shield, Sparkles, Package, Sword, Skull, ChevronRight, Scroll } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const navigationCards = [
@@ -34,6 +34,16 @@ const navigationCards = [
     accentColor: "from-amber-500/5 to-transparent",
   },
   {
+    title: "Charms",
+    description: "Discover charms with powerful skills and upgrade paths",
+    icon: Scroll,
+    link: "/talismans",
+    iconColor: "text-cyan-400",
+    iconBg: "bg-cyan-500/10",
+    borderColor: "hover:border-cyan-500/50",
+    accentColor: "from-cyan-500/5 to-transparent",
+  },
+  {
     title: "Weapons",
     description: "Explore weapons with damage stats, sharpness, and skills",
     icon: Sword,
@@ -64,7 +74,7 @@ export default function Home() {
             Monster Hunter Wilds Info
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your comprehensive guide to armour, weapons, items, decorations, and monsters. Everything you need to master
+            Your comprehensive guide to armour, weapons, items, decorations, charms, and monsters. Everything you need to master
             the hunt.
           </p>
         </section>
