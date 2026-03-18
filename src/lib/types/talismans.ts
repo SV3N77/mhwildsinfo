@@ -8,6 +8,28 @@ export interface CharmSkill {
   id: number;
 }
 
+export interface CharmCraftingMaterial {
+  id: number;
+  quantity: number;
+  item: {
+    id: number;
+    gameId: number;
+    rarity: number;
+    name: string;
+    description: string;
+    value: number;
+    carryLimit: number;
+    recipes: any[];
+  };
+}
+
+export interface CharmRankCrafting {
+  id: number;
+  craftable: boolean;
+  materials: CharmCraftingMaterial[];
+  zennyCost: number;
+}
+
 export interface CharmRank {
   id: number;
   name: string;
@@ -15,8 +37,7 @@ export interface CharmRank {
   level: number;
   rarity: number;
   skills: CharmSkill[];
-  craftable?: boolean;
-  zennyCost?: number;
+  crafting?: CharmRankCrafting;
 }
 
 export interface CharmData {
