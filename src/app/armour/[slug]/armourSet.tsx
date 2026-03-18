@@ -1,27 +1,32 @@
-"use server";
-
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { calculateFullArmorSetCost } from "@/lib/utils/armourUtils";
-import { notFound } from "next/navigation";
-import { getArmourSetBySlug } from "@/lib/actions";
 import Defense from "@/components/armour/defense";
 import Resistances from "@/components/armour/resistances";
 import SetBonusCard from "@/components/armour/setBonusCard";
 import Pieces from "@/components/armour/pieces";
 import TotalMaterialsCard from "@/components/armour/totalMaterialsCard";
+import type { ArmorSetData } from "@/lib/types/armour";
 
-export default async function ArmourSet({ slug }: { slug: string }) {
-  const armourSet = await getArmourSetBySlug(slug);
+interface ArmourSetProps {
+  armourSet: ArmorSetData;
+}
 
-  if (!armourSet) {
-    notFound();
-  }
-
+export default async function ArmourSet({ armourSet }: ArmourSetProps) {
   const totalCost = calculateFullArmorSetCost(armourSet);
 
   return (
     <div className="min-h-screen bg-linear-to-b from-background to-secondary/20">
       <div className="container mx-auto px-6 py-8 max-w-7xl">
+        <Link href="/armour">
+          <Button variant="ghost" className="gap-2 mb-6 pl-0">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Armour
+          </Button>
+        </Link>
+
         <div className="mb-6">
           <h1 className="text-3xl font-bold mb-4">{armourSet.name}</h1>
           <div className="flex items-center gap-3">

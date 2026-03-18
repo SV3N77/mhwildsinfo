@@ -2,6 +2,7 @@ import { WeaponData } from "@/lib/types/weapon";
 import { rarityColors } from "@/lib/utils/rarityColors";
 import { elementColors, weaponIcons } from "../weapons";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Zap, Flame, Droplets, Snowflake, Wind, Ghost, Star, Crown, ArrowRight, ArrowLeft } from "lucide-react";
 import SharpnessBar from "@/components/sharpnessBar";
 import { createWeaponSlug } from "@/lib/utils/weaponUtils";
@@ -36,6 +37,13 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
+      <Link href="/weapons">
+        <Button variant="ghost" className="gap-2 mb-6 pl-0">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Weapons
+        </Button>
+      </Link>
+
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <img src={weaponIcons[weapon.kind as keyof typeof weaponIcons]} alt={weapon.kind} className="w-12 h-12" />

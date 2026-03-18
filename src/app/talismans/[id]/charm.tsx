@@ -13,7 +13,7 @@ interface CharmPageProps {
 }
 
 export default function CharmPage({ charm }: CharmPageProps) {
-  const charmName = charm.ranks[0]?.name.replace(/ I$| II$| III$| IV$| V$/, '') || 'Charm';
+  const charmName = charm.ranks[0]?.name.replace(/ I$| II$| III$| IV$| V$/, "") || "Charm";
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
@@ -31,14 +31,12 @@ export default function CharmPage({ charm }: CharmPageProps) {
           </div>
           <h1 className="text-4xl font-bold">{charmName}</h1>
         </div>
-        <p className="text-muted-foreground">
-          {charm.ranks[0]?.description || "A charm with various upgrade ranks"}
-        </p>
+        <p className="text-muted-foreground">{charm.ranks[0]?.description || "A charm with various upgrade ranks"}</p>
       </div>
 
       <div className="space-y-6">
         {charm.ranks.map((rank, index) => (
-          <Card key={rank.id}>
+          <Card key={rank.id} className="transition-all hover:border-primary/50 hover:shadow-lg py-5">
             <CardHeader>
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
@@ -71,9 +69,7 @@ export default function CharmPage({ charm }: CharmPageProps) {
                           <div className="font-medium">{skill.skill.name}</div>
                           <div className="text-sm text-muted-foreground">{skill.description}</div>
                         </div>
-                        <Badge className="font-semibold">
-                          Lv. {skill.level}
-                        </Badge>
+                        <Badge className="font-semibold">Lv. {skill.level}</Badge>
                       </div>
                     ))}
                   </div>
@@ -103,10 +99,7 @@ export default function CharmPage({ charm }: CharmPageProps) {
                       <h4 className="font-medium mb-2">Materials</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {rank.crafting.materials.map((material) => (
-                          <div
-                            key={material.id}
-                            className="flex items-center gap-3 p-3 rounded-lg bg-muted/50"
-                          >
+                          <div key={material.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
                             <Package className="h-4 w-4 text-muted-foreground" />
                             <div className="flex-1 min-w-0">
                               <div className="font-medium text-sm truncate">{material.item?.name}</div>
