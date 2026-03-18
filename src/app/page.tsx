@@ -34,7 +34,7 @@ const navigationCards = [
     accentColor: "from-amber-500/5 to-transparent",
   },
   {
-    title: "Charms",
+    title: "Talismans",
     description: "Discover charms with powerful skills and upgrade paths",
     icon: Scroll,
     link: "/talismans",
@@ -74,8 +74,8 @@ export default function Home() {
             Monster Hunter Wilds Info
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your comprehensive guide to armour, weapons, items, decorations, charms, and monsters. Everything you need to master
-            the hunt.
+            Your comprehensive guide to armour, weapons, items, decorations, charms, and monsters. Everything you need
+            to master the hunt.
           </p>
         </section>
 

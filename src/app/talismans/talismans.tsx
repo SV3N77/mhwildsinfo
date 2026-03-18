@@ -22,9 +22,11 @@ function CharmCard({ charm, isExpanded, onToggle }: CharmCardProps) {
           <div className="flex items-start justify-between gap-2 mb-3">
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-base leading-tight mb-1">
-                {charm.ranks[0]?.name.replace(/ I$| II$| III$| IV$| V$/, '') || 'Charm'}
+                {charm.ranks[0]?.name.replace(/ I$| II$| III$| IV$| V$/, "") || "Charm"}
               </h3>
-              <p className="text-xs text-muted-foreground">{charm.ranks.length} rank{charm.ranks.length > 1 ? 's' : ''}</p>
+              <p className="text-xs text-muted-foreground">
+                {charm.ranks.length} rank{charm.ranks.length > 1 ? "s" : ""}
+              </p>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -59,7 +61,7 @@ function CharmCard({ charm, isExpanded, onToggle }: CharmCardProps) {
 
                 {rank.craftable !== undefined && (
                   <div className="text-xs text-muted-foreground">
-                    {rank.craftable ? 'Craftable' : 'Upgradable'} for z{rank.zennyCost?.toLocaleString() || 0}
+                    {rank.craftable ? "Craftable" : "Upgradable"} for z{rank.zennyCost?.toLocaleString() || 0}
                   </div>
                 )}
               </div>
@@ -86,22 +88,21 @@ export default function GetAllTalismans({ talismans }: GetAllTalismansProps) {
 
     const searchLower = search.toLowerCase();
     return talismans.filter((charm) =>
-      charm.ranks.some((rank) =>
-        rank.name.toLowerCase().includes(searchLower) ||
-        rank.skills?.some((skill) =>
-          skill.skill.name.toLowerCase().includes(searchLower)
-        )
-      )
+      charm.ranks.some(
+        (rank) =>
+          rank.name.toLowerCase().includes(searchLower) ||
+          rank.skills?.some((skill) => skill.skill.name.toLowerCase().includes(searchLower)),
+      ),
     );
   }, [talismans, search]);
 
   const sortedTalismans = useMemo(() => {
     return [...filteredTalismans].sort((a, b) => {
-      const aMaxRarity = Math.max(...a.ranks.map(r => r.rarity));
-      const bMaxRarity = Math.max(...b.ranks.map(r => r.rarity));
+      const aMaxRarity = Math.max(...a.ranks.map((r) => r.rarity));
+      const bMaxRarity = Math.max(...b.ranks.map((r) => r.rarity));
       const rarityDiff = bMaxRarity - aMaxRarity;
       if (rarityDiff !== 0) return rarityDiff;
-      return a.ranks[0]?.name.localeCompare(b.ranks[0]?.name || '') || 0;
+      return a.ranks[0]?.name.localeCompare(b.ranks[0]?.name || "") || 0;
     });
   }, [filteredTalismans]);
 
@@ -124,11 +125,9 @@ export default function GetAllTalismans({ talismans }: GetAllTalismansProps) {
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Scroll className="h-6 w-6" />
           </div>
-          <h1 className="text-4xl font-bold">Charms</h1>
+          <h1 className="text-4xl font-bold">Talismans</h1>
         </div>
-        <p className="text-muted-foreground">
-          Browse all charms with their skills and upgrade paths
-        </p>
+        <p className="text-muted-foreground">Browse all charms with their skills and upgrade paths</p>
       </div>
 
       <div className="mb-6">
