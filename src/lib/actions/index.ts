@@ -5,3 +5,4 @@ export * from "./monsters";
 export * from "./items";
 export * from "./decorations";
 export * from "./talismans";
+export * from "./skills";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Sparkles, Package, Sword, Skull, ChevronRight, Scroll } from "lucide-react";
+import { Shield, Sparkles, Package, Sword, Skull, ChevronRight, Scroll, Zap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const navigationCards = [
@@ -32,6 +32,16 @@ const navigationCards = [
     iconBg: "bg-amber-500/10",
     borderColor: "hover:border-amber-500/50",
     accentColor: "from-amber-500/5 to-transparent",
+  },
+  {
+    title: "Skills",
+    description: "Explore all skills with their levels and effects",
+    icon: Zap,
+    link: "/skills",
+    iconColor: "text-yellow-400",
+    iconBg: "bg-yellow-500/10",
+    borderColor: "hover:border-yellow-500/50",
+    accentColor: "from-yellow-500/5 to-transparent",
   },
   {
     title: "Talismans",
