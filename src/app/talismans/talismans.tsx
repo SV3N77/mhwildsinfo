@@ -18,7 +18,7 @@ function CharmCard({ charm }: CharmCardProps) {
   const charmName = charm.ranks[0]?.name.replace(/ I$| II$| III$| IV$| V$/, "") || "Charm";
 
   return (
-    <Link href={`/talismans/${charm.id}`}>
+    <Link href={`/talismans/${charm.slug}`}>
       <Card className="transition-all hover:border-primary/50 hover:shadow-lg">
         <CardContent className="p-4">
           <div className="flex items-start justify-between gap-2 mb-3">

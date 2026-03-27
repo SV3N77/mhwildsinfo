@@ -44,4 +44,5 @@ export interface CharmData {
   id: number;
   gameId: number;
   ranks: CharmRank[];
+  slug?: string;
 }

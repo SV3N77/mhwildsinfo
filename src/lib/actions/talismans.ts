@@ -1,5 +1,9 @@
 import { unstable_cache } from "next/cache";
 
+function generateSlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 const fetchAllCharms = unstable_cache(
   async (): Promise<any[]> => {
     const response = await fetch("https://wilds.mhdb.io/en/charms", {
@@ -10,7 +14,14 @@ const fetchAllCharms = unstable_cache(
       throw new Error(`Failed to fetch charms: ${response.statusText}`);
     }
 
-    return response.json();
+    const charms = await response.json();
+    return charms.map((charm: any) => {
+      const baseName = charm.ranks[0]?.name.replace(/ I$| II$| III$| IV$| V$/, "") || "Charm";
+      return {
+        ...charm,
+        slug: generateSlug(baseName),
+      };
+    });
   },
   ["charms-all"],
   { revalidate: 3600, tags: ["charms"] }
@@ -20,26 +31,11 @@ export async function getAllTalismans(): Promise<any[]> {
   return fetchAllCharms();
 }
 
-const fetchCharmById = unstable_cache(
-  async (id: string): Promise<any | null> => {
-    const response = await fetch(`https://wilds.mhdb.io/en/charms/${id}`, {
-      next: { revalidate: 3600, tags: [`charm-${id}`] },
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json();
-  },
-  ["charm-by-id"],
-  { revalidate: 3600, tags: ["charms"] }
-);
-
-export async function getCharmById(id: string): Promise<any> {
-  const charm = await fetchCharmById(id);
+export async function getCharmBySlug(slug: string): Promise<any> {
+  const charms = await fetchAllCharms();
+  const charm = charms.find((charm: any) => charm.slug === slug);
   if (!charm) {
-    throw new Error(`Charm not found: ${id}`);
+    throw new Error(`Charm not found: ${slug}`);
   }
   return charm;
 }
