@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo } from "react";
 import { Package, Droplet, Wrench, Zap, Gem, Flame, Utensils, Shield, HelpCircle } from "lucide-react";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 interface ItemCardProps {
   item: ItemData;
@@ -15,13 +16,13 @@ interface ItemCardProps {
 
 function ItemCard({ item }: ItemCardProps) {
   return (
-    <Card>
-      <CardContent className="p-4">
+    <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <CardContent className="p-4 h-full flex flex-col">
         <div className="flex items-start justify-between gap-2 mb-3">
           <h3 className="font-semibold text-base leading-tight flex-1">{item.name}</h3>
           <Badge
             variant="secondary"
-            className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 bg-muted ${rarityColors[item.rarity] || rarityColors[10]}`}
+            className={`px-2 py-0.5 rounded-full text-xs font-semibold shrink-0 bg-muted hover:scale-110 transition-transform duration-200 ${rarityColors[item.rarity] || rarityColors[10]}`}
           >
             R{item.rarity}
           </Badge>
@@ -42,7 +43,7 @@ function ItemCard({ item }: ItemCardProps) {
           )}
         </div>
 
-        <p className="text-sm text-muted-foreground line-clamp-3">{item.description}</p>
+        <p className="text-sm text-muted-foreground line-clamp-3 mt-auto">{item.description}</p>
       </CardContent>
     </Card>
   );
@@ -118,7 +119,7 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
-      <div className="mb-8">
+      <FadeIn className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Package className="h-6 w-6" />
@@ -128,13 +129,13 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
         <p className="text-muted-foreground">
           Browse all items available in Monster Hunter Wilds
         </p>
-      </div>
+      </FadeIn>
 
-      <div className="flex flex-col gap-3 mb-6">
+      <FadeIn delay={0.1} className="flex flex-col gap-3 mb-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 rounded-lg bg-muted p-2">
           <button
             onClick={() => setSelectedCategory("all")}
-            className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105 ${
               selectedCategory === "all"
                 ? "bg-background text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-background/50"
@@ -143,17 +144,20 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
             <span>All</span>
             <span className="text-xs text-muted-foreground">({items.length})</span>
           </button>
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             const categoryItems = sortedItems[category];
             return (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105 ${
                   selectedCategory === category
                     ? "bg-background text-foreground shadow-sm"
                     : "text-muted-foreground hover:text-foreground hover:bg-background/50"
                 }`}
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                }}
               >
                 {categoryIcons[category]}
                 <span className="truncate">{categoryNames[category] || category}</span>
@@ -166,16 +170,17 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search items by name, description..."
+          className="transition-all duration-300 focus:shadow-md"
         />
-      </div>
+      </FadeIn>
 
       <div className="space-y-6">
         {Object.entries(filteredItems).map(([category, categoryItems]) => {
           if (!categoryItems || categoryItems.length === 0) return null;
           return (
-            <div key={category}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-muted">
+            <FadeIn key={category}>
+              <div className="flex items-center gap-3 mb-4 hover:bg-muted/50 rounded-lg p-2 -ml-2 transition-colors">
+                <div className="p-2 rounded-lg bg-muted hover:bg-primary/10 hover:text-primary transition-colors">
                   {categoryIcons[category]}
                 </div>
                 <div>
@@ -183,14 +188,16 @@ export default function GetAllItems({ items }: GetAllItemsProps) {
                   <p className="text-sm text-muted-foreground">{categoryItems.length} items</p>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <StaggerContainer className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {categoryItems
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((item) => (
-                    <ItemCard key={item.id} item={item} />
+                    <StaggerItem key={`${item.id}-${selectedCategory}-${search}`}>
+                      <ItemCard item={item} />
+                    </StaggerItem>
                   ))}
-              </div>
-            </div>
+              </StaggerContainer>
+            </FadeIn>
           );
         })}
         {Object.keys(filteredItems).length === 0 && (

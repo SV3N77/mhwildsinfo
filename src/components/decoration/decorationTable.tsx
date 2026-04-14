@@ -6,6 +6,7 @@ import { Input } from "../ui/input";
 import { Skeleton } from "../ui/skeleton";
 import { DecorationCard } from "./decorationCard";
 import { Swords, Shield } from "lucide-react";
+import { StaggerContainer, StaggerItem } from "@/components/animations";
 
 interface DecorationsTableProps {
   decorations: DecorationData[];
@@ -166,11 +167,13 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
           <p className="text-sm mt-2">Try selecting a different filter category</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <StaggerContainer className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" key={`${selectedKind}-${search}`}>
           {sortedDecorations.map((deco) => (
-            <DecorationCard key={deco.id} decoration={deco} />
+            <StaggerItem key={deco.id}>
+              <DecorationCard decoration={deco} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       )}
     </div>
   );

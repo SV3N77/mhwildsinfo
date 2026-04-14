@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { createWeaponSlug } from "@/lib/utils/weaponUtils";
 import { SharpnessBarVisual } from "@/components/sharpnessBar";
+import { StaggerContainer, StaggerItem } from "@/components/animations";
 
 interface WeaponListProps {
   groupedWeapons: GroupedWeapons;
@@ -78,12 +79,13 @@ export default function WeaponList({
                 </div>
               </AccordionTrigger>
               <AccordionContent className="pt-4">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <StaggerContainer className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {weapons
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((weapon) => (
-                      <Link href={`/weapons/${createWeaponSlug(weapon.name)}`} key={weapon.id}>
-                        <div className="group relative overflow-hidden rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-lg hover:border-primary/30">
+                      <StaggerItem key={weapon.id}>
+                        <Link href={`/weapons/${createWeaponSlug(weapon.name)}`}>
+                          <div className="group relative overflow-hidden rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-lg hover:border-primary/30">
                           <div className="mb-4">
                             <div className="flex items-start justify-between gap-2">
                               <h3 className="font-semibold text-lg leading-tight flex-1 group-hover:text-primary transition-colors">{weapon.name}</h3>
@@ -151,10 +153,11 @@ export default function WeaponList({
                               )}
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    ))}
-                </div>
+                         </div>
+                       </Link>
+                     </StaggerItem>
+                   ))}
+                 </StaggerContainer>
               </AccordionContent>
             </AccordionItem>
           );

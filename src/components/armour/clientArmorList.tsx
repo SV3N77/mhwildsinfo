@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { slugify } from "@/lib/utils";
+import { StaggerContainer, StaggerItem } from "@/components/animations";
 
 export default function ClientArmorList({ armourList }: { armourList: ArmorSetData[] }) {
   const [search, setSearch] = useState("");
@@ -67,36 +68,38 @@ export default function ClientArmorList({ armourList }: { armourList: ArmorSetDa
           <div className="text-muted-foreground">No armor sets found matching "{search}"</div>
         </div>
       ) : (
-        <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <StaggerContainer className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" key={search}>
           {filteredArmour.map((armour: ArmorSetData) => (
-            <Link href={`/armour/${slugify(armour.name)}`} key={armour.id} className="group h-full">
-              <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 overflow-hidden border-border/50 flex flex-col">
-                <CardHeader className="pt-5 px-5 bg-linear-to-br from-primary/5 to-transparent">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                      <Shield className="h-5 w-5" />
+            <StaggerItem key={armour.id}>
+              <Link href={`/armour/${slugify(armour.name)}`} className="group h-full">
+                <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 overflow-hidden border-border/50 flex flex-col">
+                  <CardHeader className="pt-5 px-5 bg-linear-to-br from-primary/5 to-transparent">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                        <Shield className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <CardTitle className="text-lg leading-tight">{armour.name}</CardTitle>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <CardTitle className="text-lg leading-tight">{armour.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 flex-1">
+                    <Defense armour={armour} variant="list" />
+                    <div className="h-px bg-border/50" />
+                    <Resistances armour={armour} variant="list" />
+                    <div className="h-px bg-border/50" />
+                    <Pieces pieces={armour.pieces} variant="list" />
+                  </CardContent>
+                  <div className="px-6 pb-5 pt-4 mt-auto border-t border-border/50">
+                    <div className="flex items-center justify-center text-sm text-primary font-medium group-hover:gap-2 gap-1 transition-all">
+                      View details <ChevronRight className="h-4 w-4" />
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-4 flex-1">
-                  <Defense armour={armour} variant="list" />
-                  <div className="h-px bg-border/50" />
-                  <Resistances armour={armour} variant="list" />
-                  <div className="h-px bg-border/50" />
-                  <Pieces pieces={armour.pieces} variant="list" />
-                </CardContent>
-                <div className="px-6 pb-5 pt-4 mt-auto border-t border-border/50">
-                  <div className="flex items-center justify-center text-sm text-primary font-medium group-hover:gap-2 gap-1 transition-all">
-                    View details <ChevronRight className="h-4 w-4" />
-                  </div>
-                </div>
-              </Card>
-            </Link>
+                </Card>
+              </Link>
+            </StaggerItem>
           ))}
-        </section>
+        </StaggerContainer>
       )}
     </div>
   );

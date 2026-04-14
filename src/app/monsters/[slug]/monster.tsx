@@ -12,6 +12,7 @@ import MonsterResistances from "@/components/monsters/monsterResistances";
 import MonsterParts from "@/components/monsters/monsterParts";
 import MonsterRewards from "@/components/monsters/monsterRewards";
 import { Button } from "@/components/ui/button";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 interface MonsterPageProps {
   monsterInfo: Monster;
@@ -20,24 +21,28 @@ interface MonsterPageProps {
 export default function MonsterPage({ monsterInfo }: MonsterPageProps) {
   return (
     <div className="flex flex-col px-20 py-10 max-w-7xl mx-auto">
-      <Link href="/monsters">
-        <Button variant="ghost" className="gap-2 mb-6 pl-0">
-          <ArrowLeft className="h-4 w-4" />
-          Back to Monsters
-        </Button>
-      </Link>
+      <FadeIn>
+        <Link href="/monsters">
+          <Button variant="ghost" className="gap-2 mb-6 pl-0">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Monsters
+          </Button>
+        </Link>
+      </FadeIn>
 
-      <MonsterHeader name={monsterInfo.name} description={monsterInfo.description} />
+      <FadeIn delay={0.05}>
+        <MonsterHeader name={monsterInfo.name} description={monsterInfo.description} />
+      </FadeIn>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MonsterBasicInfo monster={monsterInfo} />
-        <MonsterSize size={monsterInfo.size} />
-        <MonsterLocations locations={monsterInfo.locations} />
-        <MonsterWeaknesses weaknesses={monsterInfo.weaknesses} />
-        <MonsterResistances resistances={monsterInfo.resistances} />
-        <MonsterParts parts={monsterInfo.parts} />
-        <MonsterRewards rewards={monsterInfo.rewards} />
-      </div>
+      <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <StaggerItem><MonsterBasicInfo monster={monsterInfo} /></StaggerItem>
+        <StaggerItem><MonsterSize size={monsterInfo.size} /></StaggerItem>
+        <StaggerItem><MonsterLocations locations={monsterInfo.locations} /></StaggerItem>
+        <StaggerItem><MonsterWeaknesses weaknesses={monsterInfo.weaknesses} /></StaggerItem>
+        <StaggerItem><MonsterResistances resistances={monsterInfo.resistances} /></StaggerItem>
+        <StaggerItem><MonsterParts parts={monsterInfo.parts} /></StaggerItem>
+        <StaggerItem><MonsterRewards rewards={monsterInfo.rewards} /></StaggerItem>
+      </StaggerContainer>
     </div>
   );
 }

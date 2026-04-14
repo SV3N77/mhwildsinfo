@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Scroll, ArrowRight, Coins, Package, ArrowLeft } from "lucide-react";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 interface CharmPageProps {
   charm: CharmData;
@@ -17,14 +18,16 @@ export default function CharmPage({ charm }: CharmPageProps) {
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
-      <Link href="/talismans">
-        <Button variant="ghost" className="gap-2 mb-6 pl-0">
-          <ArrowLeft className="h-4 w-4" />
-          Back to Charms
-        </Button>
-      </Link>
+      <FadeIn>
+        <Link href="/talismans">
+          <Button variant="ghost" className="gap-2 mb-6 pl-0">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Charms
+          </Button>
+        </Link>
+      </FadeIn>
 
-      <div className="mb-8">
+      <FadeIn delay={0.05} className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Scroll className="h-6 w-6" />
@@ -32,11 +35,12 @@ export default function CharmPage({ charm }: CharmPageProps) {
           <h1 className="text-4xl font-bold">{charmName}</h1>
         </div>
         <p className="text-muted-foreground">{charm.ranks[0]?.description || "A charm with various upgrade ranks"}</p>
-      </div>
+      </FadeIn>
 
-      <div className="space-y-6">
+      <StaggerContainer className="space-y-6">
         {charm.ranks.map((rank, index) => (
-          <Card key={rank.id} className="transition-all hover:border-primary/50 hover:shadow-lg py-5">
+          <StaggerItem key={rank.id}>
+            <Card className="transition-all hover:border-primary/50 hover:shadow-lg py-5">
             <CardHeader>
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
@@ -120,8 +124,9 @@ export default function CharmPage({ charm }: CharmPageProps) {
               )}
             </CardContent>
           </Card>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </div>
   );
 }

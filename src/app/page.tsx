@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Shield, Sparkles, Package, Sword, Skull, ChevronRight, Scroll, Zap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 const navigationCards = [
   {
@@ -79,7 +80,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-1 container mx-auto px-4 py-12">
-        <section className="mb-16 text-center">
+        <FadeIn className="mb-16 text-center">
           <h1 className="text-5xl font-bold mb-4 bg-linear-to-r from-white to-zinc-400 bg-clip-text text-transparent">
             Monster Hunter Wilds Info
           </h1>
@@ -87,14 +88,15 @@ export default function Home() {
             Your comprehensive guide to armour, weapons, items, decorations, charms, and monsters. Everything you need
             to master the hunt.
           </p>
-        </section>
+        </FadeIn>
 
         <section>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {navigationCards.map((card) => {
               const Icon = card.icon;
               return (
-                <Link href={card.link} key={card.title} className="group h-full">
+                <StaggerItem key={card.title}>
+                  <Link href={card.link} className="group h-full">
                   <Card
                     className={`h-full transition-all duration-300 hover:-translate-y-1 ${card.borderColor} overflow-hidden border-border/50 flex flex-col`}
                   >
@@ -120,9 +122,10 @@ export default function Home() {
                     </CardFooter>
                   </Card>
                 </Link>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
         </section>
       </main>
     </div>

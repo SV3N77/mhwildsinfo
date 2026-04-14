@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useState, useMemo } from "react";
 import { Zap, Shield, Swords, Crosshair } from "lucide-react";
 import { SkillCard } from "@/components/skills/skillCard";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 interface GetAllSkillsProps {
   skills: SkillData[];
@@ -54,7 +55,7 @@ export default function GetAllSkills({ skills }: GetAllSkillsProps) {
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
-      <div className="mb-8">
+      <FadeIn className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Zap className="h-6 w-6" />
@@ -64,9 +65,9 @@ export default function GetAllSkills({ skills }: GetAllSkillsProps) {
         <p className="text-muted-foreground">
           Browse all skills available in Monster Hunter Wilds
         </p>
-      </div>
+      </FadeIn>
 
-      <div className="flex flex-col gap-3 mb-6">
+      <FadeIn delay={0.1} className="flex flex-col gap-3 mb-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 rounded-lg bg-muted p-2">
           <button
             onClick={() => setSelectedKind("all")}
@@ -103,15 +104,17 @@ export default function GetAllSkills({ skills }: GetAllSkillsProps) {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search skills by name, description..."
         />
-      </div>
+      </FadeIn>
 
-      <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <StaggerContainer className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" key={`${selectedKind}-${search}`}>
         {filteredSkills
           .sort((a, b) => a.name.localeCompare(b.name))
           .map((skill) => (
-            <SkillCard key={skill.id} skill={skill} />
+            <StaggerItem key={skill.id}>
+              <SkillCard skill={skill} />
+            </StaggerItem>
           ))}
-      </div>
+      </StaggerContainer>
 
       {filteredSkills.length === 0 && (
         <div className="text-center py-16 text-muted-foreground">

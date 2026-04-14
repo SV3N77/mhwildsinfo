@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useState, useMemo } from "react";
 import { Scroll, ChevronRight, Sparkles } from "lucide-react";
+import { StaggerContainer, StaggerItem, FadeIn } from "@/components/animations";
 
 interface CharmCardProps {
   charm: CharmData;
@@ -115,7 +116,7 @@ export default function GetAllTalismans({ talismans }: GetAllTalismansProps) {
 
   return (
     <div className="flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
-      <div className="mb-8">
+      <FadeIn className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Scroll className="h-6 w-6" />
@@ -123,24 +124,26 @@ export default function GetAllTalismans({ talismans }: GetAllTalismansProps) {
           <h1 className="text-4xl font-bold">Charms</h1>
         </div>
         <p className="text-muted-foreground">Browse all charms with their skills and upgrade paths</p>
-      </div>
+      </FadeIn>
 
-      <div className="mb-6">
+      <FadeIn delay={0.1} className="mb-6">
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search charms by name or skill..."
         />
-      </div>
+      </FadeIn>
 
       {regularCharms.length > 0 && (
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Charms</h2>
-          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <StaggerContainer className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {regularCharms.map((talisman) => (
-              <CharmCard key={talisman.id} charm={talisman} />
+              <StaggerItem key={talisman.id}>
+                <CharmCard charm={talisman} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       )}
 
@@ -153,11 +156,13 @@ export default function GetAllTalismans({ talismans }: GetAllTalismansProps) {
           <p className="text-sm text-muted-foreground mb-4">
             Golden, Secret, Historical, and Unknown charms with random skill combinations
           </p>
-          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <StaggerContainer className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {randomCharms.map((talisman) => (
-              <CharmCard key={talisman.id} charm={talisman} />
+              <StaggerItem key={talisman.id}>
+                <CharmCard charm={talisman} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       )}
 
