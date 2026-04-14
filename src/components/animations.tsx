@@ -2,6 +2,7 @@
 
 import { motion, type HTMLMotionProps } from "framer-motion";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 const containerVariants = {
   hidden: {},
@@ -57,7 +58,7 @@ export function StaggerItem({
   className?: string;
 }) {
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <motion.div variants={itemVariants} className={cn("h-full", className)}>
       {children}
     </motion.div>
   );

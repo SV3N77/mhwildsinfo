@@ -9,7 +9,7 @@ export default function MonsterLocations({ locations }: MonsterLocationsProps) {
   if (locations.length === 0) return null;
 
   return (
-    <Card className="lg:col-span-2 py-6">
+    <Card className="py-6">
       <CardHeader>
         <CardTitle>Locations</CardTitle>
       </CardHeader>

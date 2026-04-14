@@ -37,11 +37,11 @@ export default function MonsterPage({ monsterInfo }: MonsterPageProps) {
       <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <StaggerItem><MonsterBasicInfo monster={monsterInfo} /></StaggerItem>
         <StaggerItem><MonsterSize size={monsterInfo.size} /></StaggerItem>
-        <StaggerItem><MonsterLocations locations={monsterInfo.locations} /></StaggerItem>
-        <StaggerItem><MonsterWeaknesses weaknesses={monsterInfo.weaknesses} /></StaggerItem>
-        <StaggerItem><MonsterResistances resistances={monsterInfo.resistances} /></StaggerItem>
-        <StaggerItem><MonsterParts parts={monsterInfo.parts} /></StaggerItem>
-        <StaggerItem><MonsterRewards rewards={monsterInfo.rewards} /></StaggerItem>
+        <StaggerItem className="lg:col-span-2"><MonsterLocations locations={monsterInfo.locations} /></StaggerItem>
+        <StaggerItem className="lg:col-span-2"><MonsterWeaknesses weaknesses={monsterInfo.weaknesses} /></StaggerItem>
+        <StaggerItem className="lg:col-span-2"><MonsterResistances resistances={monsterInfo.resistances} /></StaggerItem>
+        <StaggerItem className="lg:col-span-2"><MonsterParts parts={monsterInfo.parts} /></StaggerItem>
+        <StaggerItem className="lg:col-span-2"><MonsterRewards rewards={monsterInfo.rewards} /></StaggerItem>
       </StaggerContainer>
     </div>
   );
