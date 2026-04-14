@@ -29,8 +29,7 @@ export default function SharpnessBar({ sharpness, handicraft }: SharpnessBarProp
   return (
     <div className="space-y-4">
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <h4 className="font-semibold">Sharpness</h4>
+        <div className="flex items-center justify-end mb-2">
           <span className="text-sm text-muted-foreground">Total Hits: {totalHits}</span>
         </div>
         <SharpnessBarVisual sharpness={sharpness} />
