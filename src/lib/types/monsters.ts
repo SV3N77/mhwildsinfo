@@ -88,7 +88,7 @@ export interface Location {
   camps: Camp[];
 }
 
-export interface Camp {
+interface Camp {
   id: number;
   location: { id: number };
   name: string;
@@ -99,7 +99,7 @@ export interface Camp {
   gameId: number;
 }
 
-export interface MonsterRewardCondition {
+interface MonsterRewardCondition {
   id: number;
   kind: string;
   rank: Rank;

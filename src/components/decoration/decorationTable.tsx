@@ -10,7 +10,6 @@ import { StaggerContainer, StaggerItem } from "@/components/animations";
 
 interface DecorationsTableProps {
   decorations: DecorationData[];
-  caption?: string;
 }
 
 export function DecorationsTable({ decorations }: DecorationsTableProps) {
@@ -21,13 +20,6 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
   const [selectedKind, setSelectedKind] = useState<"all" | "weapon" | "armor">("all");
 
   const [loading, setLoading] = useState(false);
-  const [sortConfig, setSortConfig] = useState<{
-    key: keyof DecorationData | null;
-    direction: "ascending" | "descending";
-  }>({
-    key: "name",
-    direction: "ascending",
-  });
 
   useEffect(() => {
     if (search.length > 2) {
@@ -63,33 +55,6 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
         (item.skills?.some((skill) => skill.skill.name.toLowerCase().includes(search.toLowerCase())) ?? false)
     );
   }, [search, decorations, selectedKind]);
-
-  const sortedDecorations = useMemo(() => {
-    let sortableItems = [...filteredDecorations];
-    if (sortConfig.key !== null) {
-      sortableItems.sort((a, b) => {
-        const aValue = a[sortConfig.key!];
-        const bValue = b[sortConfig.key!];
-
-        if (aValue! < bValue!) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (aValue! > bValue!) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableItems;
-  }, [filteredDecorations, sortConfig]);
-
-  const requestSort = (key: keyof DecorationData) => {
-    let direction: "ascending" | "descending" = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-  };
 
   const isSearching = search.length > 0;
   const hasResults = filteredDecorations.length > 0;
@@ -161,14 +126,14 @@ export function DecorationsTable({ decorations }: DecorationsTableProps) {
           <p className="text-lg">No decorations found matching "{search}"</p>
           <p className="text-sm mt-2">Try adjusting your search terms or filter</p>
         </div>
-      ) : sortedDecorations.length === 0 ? (
+      ) : filteredDecorations.length === 0 ? (
         <div className="text-center py-16 text-muted-foreground">
           <p className="text-lg">No decorations found</p>
           <p className="text-sm mt-2">Try selecting a different filter category</p>
         </div>
       ) : (
         <StaggerContainer className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" key={`${selectedKind}-${search}`}>
-          {sortedDecorations.map((deco) => (
+          {filteredDecorations.map((deco) => (
             <StaggerItem key={deco.id}>
               <DecorationCard decoration={deco} />
             </StaggerItem>

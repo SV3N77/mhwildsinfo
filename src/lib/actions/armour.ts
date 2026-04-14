@@ -2,7 +2,7 @@ import { unstable_cache } from "next/cache";
 import { slugify } from "@/lib/utils";
 import { ArmorSetData } from "@/lib/types/armour";
 
-export interface ArmourIndex {
+interface ArmourIndex {
   id: number;
   name: string;
   slug: string;
@@ -32,7 +32,7 @@ const fetchArmourIndex = unstable_cache(
   { revalidate: 3600, tags: ["armour-index"] }
 );
 
-export async function getArmourIndex(): Promise<ArmourIndex[]> {
+async function getArmourIndex(): Promise<ArmourIndex[]> {
   return fetchArmourIndex();
 }
 
@@ -62,10 +62,6 @@ export async function getArmourSetBySlug(slug: string): Promise<ArmorSetData | n
   }
 
   return fetchArmourSetById(setIndex.id);
-}
-
-export async function getArmourSetById(id: number): Promise<ArmorSetData | null> {
-  return fetchArmourSetById(id);
 }
 
 const fetchAllArmourSets = unstable_cache(

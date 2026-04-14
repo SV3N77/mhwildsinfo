@@ -19,7 +19,7 @@ const fetchWeaponsByType = unstable_cache(
   { revalidate: 3600, tags: ["weapons"] }
 );
 
-export async function getWeaponsByType(type: WeaponCategory): Promise<WeaponData[]> {
+async function getWeaponsByType(type: WeaponCategory): Promise<WeaponData[]> {
   return fetchWeaponsByType(type);
 }
 
@@ -36,40 +36,6 @@ export async function getAllWeapons(): Promise<GroupedWeapons> {
   }, {} as GroupedWeapons);
 
   return grouped;
-}
-
-export interface WeaponIndex {
-  id: number;
-  name: string;
-  kind: WeaponCategory;
-  rarity: number;
-}
-
-const fetchWeaponsIndex = unstable_cache(
-  async (): Promise<WeaponIndex[]> => {
-    const response = await fetch("https://wilds.mhdb.io/en/weapons", {
-      next: { revalidate: 3600, tags: ["weapons-index"] },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch weapons index: ${response.statusText}`);
-    }
-
-    const allWeapons: WeaponData[] = await response.json();
-
-    return allWeapons.map((w) => ({
-      id: w.id,
-      name: w.name,
-      kind: w.kind as WeaponCategory,
-      rarity: w.rarity,
-    }));
-  },
-  ["weapons-index"],
-  { revalidate: 3600, tags: ["weapons-index"] }
-);
-
-export async function getWeaponsIndex(): Promise<WeaponIndex[]> {
-  return fetchWeaponsIndex();
 }
 
 export async function getWeaponBySlug(slug: string): Promise<WeaponData | null> {

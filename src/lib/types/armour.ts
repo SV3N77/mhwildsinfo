@@ -1,13 +1,13 @@
 type Rank = "low" | "high" | "master";
 
-export interface IconInfo {
+interface IconInfo {
   id: number;
   kind: string;
   colorId?: number;
   color?: string;
 }
 
-export interface MinimalIdRef {
+interface MinimalIdRef {
   id: number;
 }
 
@@ -24,13 +24,13 @@ export interface CraftingItemDetail {
   icon?: IconInfo | null;
 }
 
-export interface CraftingMaterial {
+interface CraftingMaterial {
   item: CraftingItemDetail;
   quantity: number;
   id: number; // ID of the material requirement entry
 }
 
-export interface ArmorPieceCraftingDetails {
+interface ArmorPieceCraftingDetails {
   armor: MinimalIdRef; // Was your 'Armor' interface
   materials: CraftingMaterial[];
   zennyCost: number;
@@ -38,7 +38,7 @@ export interface ArmorPieceCraftingDetails {
 }
 
 // --- Interfaces for Skills and Ranks (General) ---
-export interface SkillDefinitionRank {
+interface SkillDefinitionRank {
   id: number;
   skill?: MinimalIdRef; // Was your 'Skill3'
   level?: number;
@@ -46,7 +46,7 @@ export interface SkillDefinitionRank {
   description?: string;
 }
 
-export interface SkillDefinition {
+interface SkillDefinition {
   // Renamed from your 'Skill2'
   id: number;
   gameId: number;
@@ -58,7 +58,7 @@ export interface SkillDefinition {
 }
 
 // --- Interfaces for Armor Piece Specifics ---
-export interface ArmorPieceAttachedSkill {
+interface ArmorPieceAttachedSkill {
   skill: SkillDefinition;
   level: number;
   name: string | null; // Added based on JSON example (was null)
@@ -74,7 +74,7 @@ export interface Resistances {
   dragon: number;
 }
 
-export interface DefenseStats {
+interface DefenseStats {
   base: number;
   max: number;
 }
@@ -96,21 +96,14 @@ export interface ArmorPiece {
 }
 
 // --- Interfaces for Armor Set Bonuses ---
-export interface GroupBonusAppliedSkill {
-  id: number;
-  skill: { id: number; name: string };
-  level: number;
-  description: string;
-}
-
-export interface GroupBonusRank {
+interface GroupBonusRank {
   id: number;
   bonus: MinimalIdRef;
   pieces: number;
   skill: { id: number; skill: MinimalIdRef; level: number; description: string };
 }
 
-export interface GroupBonusDefinition {
+interface GroupBonusDefinition {
   id: number;
   skill: {
     id: number;
@@ -119,7 +112,7 @@ export interface GroupBonusDefinition {
   ranks: GroupBonusRank[];
 }
 
-export type ArmorSetBonus = GroupBonusDefinition;
+type ArmorSetBonus = GroupBonusDefinition;
 
 export interface ArmorSetData {
   id: number;
@@ -130,7 +123,7 @@ export interface ArmorSetData {
   groupBonus: GroupBonusDefinition | null;
 }
 
-export interface DisplayStat {
+interface DisplayStat {
   label: string; // e.g., "Fire Resistance"
   value: number; // The calculated numeric value
 }

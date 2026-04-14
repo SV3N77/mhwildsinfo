@@ -1,4 +1,4 @@
-export interface CharmSkill {
+interface CharmSkill {
   skill: {
     id: number;
     name: string;
@@ -8,7 +8,7 @@ export interface CharmSkill {
   id: number;
 }
 
-export interface CharmCraftingMaterial {
+interface CharmCraftingMaterial {
   id: number;
   quantity: number;
   item: {
@@ -23,14 +23,14 @@ export interface CharmCraftingMaterial {
   };
 }
 
-export interface CharmRankCrafting {
+interface CharmRankCrafting {
   id: number;
   craftable: boolean;
   materials: CharmCraftingMaterial[];
   zennyCost: number;
 }
 
-export interface CharmRank {
+interface CharmRank {
   id: number;
   name: string;
   description: string;

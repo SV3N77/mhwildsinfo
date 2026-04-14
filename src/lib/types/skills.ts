@@ -1,9 +1,9 @@
-export interface SkillIcon {
+interface SkillIcon {
   id: number;
   kind: string;
 }
 
-export interface SkillRank {
+interface SkillRank {
   id: number;
   level: number;
   description: string;

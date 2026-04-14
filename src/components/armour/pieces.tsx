@@ -2,11 +2,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Package } from "lucide-react";
 import { rarityColors } from "@/lib/utils/rarityColors";
-import type { ArmorPiece, ArmorSetData } from "@/lib/types/armour";
+import type { ArmorPiece } from "@/lib/types/armour";
 
 interface PiecesProps {
   pieces: ArmorPiece[];
-  armourSet?: ArmorSetData;
   variant?: "card" | "list";
 }
 

@@ -79,14 +79,14 @@ export default function WeaponList({
                 </div>
               </AccordionTrigger>
               <AccordionContent className="pt-4">
-                <StaggerContainer className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <StaggerContainer className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-stretch">
                   {weapons
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((weapon) => (
                       <StaggerItem key={weapon.id}>
-                        <Link href={`/weapons/${createWeaponSlug(weapon.name)}`}>
-                          <div className="group relative overflow-hidden rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-lg hover:border-primary/30">
-                          <div className="mb-4">
+                         <Link href={`/weapons/${createWeaponSlug(weapon.name)}`} className="block h-full">
+                           <div className="group relative overflow-hidden rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-lg hover:border-primary/30 h-full flex flex-col">
+                           <div className="mb-4">
                             <div className="flex items-start justify-between gap-2">
                               <h3 className="font-semibold text-lg leading-tight flex-1 group-hover:text-primary transition-colors">{weapon.name}</h3>
                               <span
@@ -111,7 +111,7 @@ export default function WeaponList({
                             </div>
                           </div>
 
-                          <div className="mt-4 pt-4 border-t space-y-2">
+                          <div className="mt-4 pt-4 border-t space-y-2 flex-1">
                             {weapon.sharpness && (
                               <div className="mb-3">
                                 <p className="text-xs text-muted-foreground mb-2">Sharpness</p>

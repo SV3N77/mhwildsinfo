@@ -1,4 +1,4 @@
-export interface IconInfo {
+interface IconInfo {
   id: number;
   kind: string;
   colorId: number;
@@ -17,20 +17,11 @@ export interface ItemData {
   icon: IconInfo;
 }
 
-export interface Recipe {
+interface Recipe {
   id: number;
   output: { id: number };
   amount: number;
   inputs: ItemData[];
-}
-
-export interface Input {
-  name: string;
-  id: number;
-}
-
-export interface Output {
-  id: number;
 }
 
 export type ItemCategory =

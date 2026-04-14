@@ -120,16 +120,6 @@ export interface Sharpness {
   purple: number;
 }
 
-export interface Handicraft {
-  red: number;
-  orange: number;
-  yellow: number;
-  green: number;
-  blue: number;
-  white: number;
-  purple: number;
-}
-
 // Define the exact category names using 'as const' for strong typing
 export const weaponCategories = [
   "great-sword",
