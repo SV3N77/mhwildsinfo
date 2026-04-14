@@ -134,7 +134,7 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
                         </div>
                       ))}
                     </div>
-                    {weapon.crafting.craftingZennyCost > 0 && (
+                    {(weapon.crafting.craftingZennyCost ?? 0) > 0 && (
                       <div className="flex justify-between items-center mt-3 pt-3 border-t">
                         <span className="text-sm text-muted-foreground">Zenny Cost</span>
                         <span className="font-semibold">{weapon.crafting.craftingZennyCost}z</span>
@@ -155,7 +155,7 @@ export default function WeaponPage({ weapon }: WeaponPageProps) {
                         </div>
                       ))}
                     </div>
-                    {weapon.crafting.upgradeZennyCost > 0 && (
+                    {(weapon.crafting.upgradeZennyCost ?? 0) > 0 && (
                       <div className="flex justify-between items-center mt-3 pt-3 border-t">
                         <span className="text-sm text-muted-foreground">Zenny Cost</span>
                         <span className="font-semibold">{weapon.crafting.upgradeZennyCost}z</span>
