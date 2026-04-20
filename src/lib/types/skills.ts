@@ -16,6 +16,7 @@ export interface SkillData {
   id: number;
   gameId: number;
   name: string;
+  slug: string;
   description: string;
   kind: string;
   icon: SkillIcon;
