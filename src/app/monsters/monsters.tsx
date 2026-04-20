@@ -51,9 +51,9 @@ export default function GetAllMonsters({ data }: GetAllMonstersProps) {
           <StaggerItem key={monster.id}>
             <Link
               href={`/monsters/${monster.slug}`}
-              className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col gap-3"
+              className="border border-gray-300 rounded-lg shadow-md p-4 flex flex-col gap-3 h-full"
             >
-              <div className="p-4">
+              <div className="p-4 flex-1">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="relative w-16 h-16 shrink-0">
                     <Image

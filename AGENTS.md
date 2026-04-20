@@ -1,9 +1,11 @@
 # AGENTS.md - Monster Hunter Wilds Info
 
 ## Project Overview
-Monster Hunter Wilds information website built with modern web technologies to display game data including monsters, weapons, armour, items, and decorations.
+
+Monster Hunter Wilds information website built with modern web technologies to display game data including monsters, weapons, armour, items, decorations, skills, and talismans.
 
 ## Tech Stack
+
 - **Framework**: Next.js 16 (App Router) with Turbopack
 - **Runtime**: React 19
 - **Language**: TypeScript 5
@@ -15,9 +17,11 @@ Monster Hunter Wilds information website built with modern web technologies to d
 ## CRITICAL INSTRUCTIONS
 
 ### NEVER RUN BUILD
+
 ⚠️ **IMPORTANT**: The dev server is already running. Do NOT run `yarn build` or any build commands. The dev server handles hot-reloading automatically.
 
 ### DO NOT RUN ESLINT AUTOMATICALLY
+
 ⚠️ **IMPORTANT**: Do NOT run `yarn lint` automatically after every change. Only run linting when explicitly requested or before committing. The dev server handles hot-reloading without lint checks.
 
 ## Available Commands
@@ -41,23 +45,20 @@ yarn lint
 ```
 mhwildsinfo/
 ├── src/
-│   ├── api/                         # API layer and data fetching
-│   │
 │   ├── app/                         # Next.js App Router (src/app)
 │   │   ├── layout.tsx               # Root layout with providers
 │   │   ├── page.tsx                 # Homepage (/)
+│   │   ├── template.tsx             # Template wrapper
 │   │   ├── globals.css              # Global Tailwind styles
 │   │   │
 │   │   ├── armour/                  # Armour section (/armour)
 │   │   │   ├── page.tsx             # Armour listing page
-│   │   │   ├── armours.tsx          # Client-side armour list
-│   │   │   └── [id]/                # Dynamic route for individual armour
+│   │   │   └── [slug]/              # Dynamic route for individual armour
 │   │   │       ├── page.tsx         # Armour detail page
 │   │   │       └── armourSet.tsx    # Armour set display component
 │   │   │
 │   │   ├── decorations/             # Decorations section (/decorations)
-│   │   │   ├── page.tsx             # Decorations listing page
-│   │   │   └── decorations.tsx      # Client-side decorations list
+│   │   │   └── page.tsx             # Decorations listing page
 │   │   │
 │   │   ├── items/                   # Items section (/items)
 │   │   │   ├── page.tsx             # Items listing page
@@ -66,59 +67,115 @@ mhwildsinfo/
 │   │   ├── monsters/                # Monsters section (/monsters)
 │   │   │   ├── page.tsx             # Monsters listing page
 │   │   │   ├── monsters.tsx         # Client-side monsters list
-│   │   │   └── [id]/                # Dynamic route for individual monsters
+│   │   │   └── [slug]/              # Dynamic route for individual monsters
 │   │   │       ├── page.tsx         # Monster detail page
 │   │   │       └── monster.tsx      # Monster detail component
 │   │   │
-│   │   ├── weapons/                 # Weapons section (/weapons)
-│   │   │   ├── page.tsx             # Weapons listing page
-│   │   │   └── weapons.tsx          # Client-side weapons list
+│   │   ├── skills/                  # Skills section (/skills)
+│   │   │   ├── page.tsx             # Skills listing page
+│   │   │   ├── skills.tsx           # Client-side skills list
+│   │   │   └── [slug]/              # Dynamic route for individual skills
+│   │   │       ├── page.tsx         # Skill detail page
+│   │   │       └── skillDetail.tsx  # Skill detail component
 │   │   │
-│   │   └── search/                  # Search page (/search)
-│   │       └── page.tsx             # Search interface
+│   │   ├── talismans/               # Talismans section (/talismans)
+│   │   │   ├── page.tsx             # Talismans listing page
+│   │   │   ├── talismans.tsx        # Client-side talismans list
+│   │   │   └── [slug]/              # Dynamic route for individual talismans
+│   │   │       ├── page.tsx         # Talisman detail page
+│   │   │       └── charm.tsx        # Talisman detail component
+│   │   │
+│   │   └── weapons/                 # Weapons section (/weapons)
+│   │       ├── page.tsx             # Weapons listing page
+│   │       ├── weapons.tsx          # Client-side weapons list
+│   │       ├── weaponList.tsx       # Weapon list component
+│   │       └── [slug]/              # Dynamic route for individual weapons
+│   │           ├── page.tsx         # Weapon detail page
+│   │           └── weapon.tsx       # Weapon detail component
 │   │
 │   ├── components/                  # React components
+│   │   ├── animations.tsx           # Animation components
+│   │   ├── footer.tsx               # Footer component
+│   │   ├── pageTransition.tsx       # Page transition wrapper
+│   │   ├── sharpnessBar.tsx         # Weapon sharpness bar
 │   │   ├── topBar.tsx               # Main navigation bar
 │   │   │
 │   │   ├── armour/                  # Armour-specific components
 │   │   │   ├── clientArmorList.tsx  # Client-side armour grid/list
 │   │   │   ├── defense.tsx          # Defense stats display
 │   │   │   ├── pieces.tsx           # Individual armour pieces
-│   │   │   └── resistances.tsx      # Elemental resistances
+│   │   │   ├── resistances.tsx      # Elemental resistances
+│   │   │   ├── setBonusCard.tsx     # Set bonus card display
+│   │   │   └── totalMaterialsCard.tsx # Total materials card display
 │   │   │
 │   │   ├── decoration/              # Decoration components
+│   │   │   ├── decorationCard.tsx   # Individual decoration card
 │   │   │   └── decorationTable.tsx  # Decorations data table
+│   │   │
+│   │   ├── monsters/                # Monster components
+│   │   │   ├── monsterBasicInfo.tsx # Monster basic info display
+│   │   │   ├── monsterHeader.tsx    # Monster header component
+│   │   │   ├── monsterLocations.tsx # Monster locations display
+│   │   │   ├── monsterParts.tsx     # Monster breakable parts
+│   │   │   ├── monsterResistances.tsx # Monster elemental resistances
+│   │   │   ├── monsterRewards.tsx   # Monster rewards display
+│   │   │   ├── monsterSize.tsx      # Monster size display
+│   │   │   └── monsterWeaknesses.tsx # Monster weaknesses display
+│   │   │
+│   │   ├── skills/                  # Skill components
+│   │   │   └── skillCard.tsx        # Individual skill card
 │   │   │
 │   │   └── ui/                      # shadcn/ui components
 │   │       ├── accordion.tsx        # Collapsible content
+│   │       ├── badge.tsx            # Badge component
 │   │       ├── button.tsx           # Button variants
 │   │       ├── card.tsx             # Card container
 │   │       ├── input.tsx            # Input field
 │   │       ├── sheet.tsx            # Side panel/sheet
-│   │       ├── skeleton.tsx         # Loading skeleton
-│   │       └── table.tsx            # Data table
+│   │       └── skeleton.tsx         # Loading skeleton
 │   │
 │   └── lib/                         # Utilities and types
+│       ├── utils.ts                 # General utility helpers
+│       │
+│       ├── actions/                 # Server actions / data fetching
+│       │   ├── index.ts             # Barrel export
+│       │   ├── armour.ts            # Armour data fetching
+│       │   ├── decorations.ts       # Decorations data fetching
+│       │   ├── items.ts             # Items data fetching
+│       │   ├── monsters.ts          # Monsters data fetching
+│       │   ├── skills.ts            # Skills data fetching
+│       │   ├── talismans.ts         # Talismans data fetching
+│       │   └── weapons.ts           # Weapons data fetching
+│       │
 │       ├── types/                   # TypeScript interfaces
 │       │   ├── armour.ts            # Armour type definitions
 │       │   ├── decoration.ts        # Decoration type definitions
 │       │   ├── items.ts             # Item type definitions
 │       │   ├── monsters.ts          # Monster type definitions
+│       │   ├── skills.ts            # Skill type definitions
+│       │   ├── talismans.ts         # Talisman type definitions
 │       │   └── weapon.ts            # Weapon type definitions
 │       │
 │       └── utils/                   # Helper functions
 │           ├── armourUtils.ts       # Armour data utilities
 │           ├── itemsUtils.ts        # Item data utilities
-│           ├── util.ts              # General helpers
+│           ├── rarityColors.ts      # Rarity color mappings
 │           └── weaponUtils.ts       # Weapon data utilities
 │
 ├── public/                          # Static assets
-│   ├── images/
-│   │   └── placeholder.png          # Placeholder images
-│   └── *.svg                        # Icons and graphics
+│   ├── file.svg                     # File icon
+│   ├── globe.svg                    # Globe icon
+│   ├── next.svg                     # Next.js logo
+│   ├── vercel.svg                   # Vercel logo
+│   ├── window.svg                   # Window icon
+│   └── images/
+│       ├── placeholder.png          # Placeholder image
+│       ├── monsters/                # Monster icons (65 webp/png files)
+│       └── weapons/                 # Weapon type icons (14 webp files)
 │
 ├── components.json                  # shadcn/ui configuration
 ├── eslint.config.mjs               # ESLint flat config
+├── next-env.d.ts                   # Next.js type declarations
 ├── next.config.ts                  # Next.js configuration
 ├── package.json                    # Dependencies and scripts
 ├── postcss.config.mjs              # PostCSS + Tailwind config
@@ -129,25 +186,31 @@ mhwildsinfo/
 ## Component Patterns
 
 ### shadcn/ui Components
+
 All UI components are from shadcn/ui and use Radix UI primitives. To add new components:
+
 ```bash
 yarn dlx shadcn@latest add [component-name]
 ```
 
 ### Import Path Aliases
+
 Use the `@/*` alias for imports from `src/`:
+
 ```typescript
-import { Component } from '@/components/ui/component'
-import { someUtil } from '@/lib/utils/util'
-import { SomeType } from '@/lib/types/types'
+import { Component } from "@/components/ui/component";
+import { someUtil } from "@/lib/utils/util";
+import { SomeType } from "@/lib/types/types";
 ```
 
 ### TypeScript Configuration
+
 - Strict mode enabled
 - Path alias `@/*` → `./src/*`
 - Next.js plugin for App Router support
 
 ### Tailwind CSS 4
+
 - Uses PostCSS for processing
 - Utility-first CSS classes
 - Custom animations via `tailwindcss-animate`
@@ -155,30 +218,47 @@ import { SomeType } from '@/lib/types/types'
 ## Key Features by Section
 
 ### Monsters
+
 - Monster listing with search/filter
 - Individual monster detail pages
 - Monster data types and utilities
 
 ### Armour
+
 - Armour set listings
 - Individual armour piece details
 - Defense and resistance displays
 - Armour piece composition
 
 ### Weapons
+
 - Weapon listings by type
 - Weapon statistics and details
 - Weapon data utilities
 
 ### Decorations
+
 - Decoration listings
 - Decoration table with skills
 - Rarity and slot information
 
 ### Items
+
 - Item listings
 - Item categories and details
 - Item data management
+
+### Skills
+
+- Skills listing with search/filter
+- Individual skill detail pages
+- Skill data types and utilities
+
+### Talismans
+
+- Talisman listings with search/filter
+- Individual talisman detail pages
+- Talisman data types and utilities
 
 ## Development Workflow
 
@@ -194,4 +274,5 @@ import { SomeType } from '@/lib/types/types'
 - Use shadcn/ui components for UI elements
 - Keep types in `src/lib/types/`
 - Keep utilities in `src/lib/utils/`
+- Keep server actions in `src/lib/actions/`
 - Never run `yarn build` - dev server is active

@@ -9,7 +9,7 @@ export default function MonsterRewards({ rewards }: MonsterRewardsProps) {
   if (rewards.length === 0) return null;
 
   return (
-    <Card className="py-6">
+    <Card className="py-6 h-full">
       <CardHeader>
         <CardTitle>Rewards</CardTitle>
       </CardHeader>

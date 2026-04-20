@@ -7,7 +7,7 @@ interface MonsterSizeProps {
 
 export default function MonsterSize({ size }: MonsterSizeProps) {
   return (
-    <Card className="py-6">
+    <Card className="py-6 h-full">
       <CardHeader>
         <CardTitle>Monster Size</CardTitle>
       </CardHeader>

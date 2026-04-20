@@ -9,7 +9,7 @@ export default function MonsterWeaknesses({ weaknesses }: MonsterWeaknessesProps
   if (weaknesses.length === 0) return null;
 
   return (
-    <Card className="py-6">
+    <Card className="py-6 h-full">
       <CardHeader>
         <CardTitle>Weaknesses</CardTitle>
       </CardHeader>

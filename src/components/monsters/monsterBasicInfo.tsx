@@ -7,7 +7,7 @@ interface MonsterBasicInfoProps {
 
 export default function MonsterBasicInfo({ monster }: MonsterBasicInfoProps) {
   return (
-    <Card className="border-2 py-6">
+    <Card className="border-2 py-6 h-full">
       <CardHeader>
         <CardTitle>Basic Information</CardTitle>
       </CardHeader>

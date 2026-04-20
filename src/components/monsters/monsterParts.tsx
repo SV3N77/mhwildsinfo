@@ -11,7 +11,7 @@ export default function MonsterParts({ parts }: MonsterPartsProps) {
   if (filteredParts.length === 0) return null;
 
   return (
-    <Card className="py-6">
+    <Card className="py-6 h-full">
       <CardHeader>
         <CardTitle>Monster Parts</CardTitle>
       </CardHeader>
